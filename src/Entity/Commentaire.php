@@ -41,10 +41,9 @@ class Commentaire
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="Commentaire")
-     * @ORM\JoinColumn(name="idArticle", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idArticle", referencedColumnName="id",onDelete="CASCADE")
      */
     private $idArticle;
 

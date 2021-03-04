@@ -27,7 +27,7 @@
 
             <ul class="sidebar-nav">
                 <li class="sidebar-header">
-                  Gestion du Blog
+                    Gestion du Blog
                 </li>
 
                 <li class="sidebar-item">
@@ -37,7 +37,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link"href="{{ url('affichage_blog_Back') }}">
+                    <a class="sidebar-link"href="{{ url('affichage_blog') }}">
                         <i class="align-middle" data-feather="user"></i> <span class="align-middle">Liste des article</span>
                     </a>
                 </li>
@@ -237,39 +237,33 @@
 
                 <div class="row">
 
-                        <div class="card">
+                    <div class="card">
 
-                            <div class="card-body">
+                        <div class="card-body">
 
 
-                                {{ form_start(form)}}
+                            <form method="post" action=""{{ url('modifier_article',{'id':article.id}) }}"">
+                                <div class="mb-3">
+                                    <label class="form-label">Titre</label>
+                                    <input type="text" class="form-control"  name="titre" value="{{ article.titre }}">
+                                </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Titre</label> <br/>
-
-                                    {{ form_widget(form.titre, {'attr': {'id':'titre'}}) }}
-
+                                    <label class="form-label">Contenue</label>
+                                    <input type="text" class="form-control"  name="description" value="{{ article.description }}" height="40px"  />
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Contenue</label><br/>
 
-                                    {{ form_widget(form.description, {'attr': {'id':'description'}}) }}
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label w-100">Image</label><br/>
-                                    {{ form_widget(form.image, {'attr': {'id':'image'}}) }}
-                                </div>
+
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
 
-                                {{ form_end(form)}}
-
-                            </div>
                         </div>
                     </div>
+                </div>
 
 
 
-                            </div>
+            </div>
 
 
 

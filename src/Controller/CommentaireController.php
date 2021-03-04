@@ -57,4 +57,24 @@ class CommentaireController extends AbstractController
         $nbr=count($listCommentaire);
         return $this->render('front/blog-single.html.twig',array('comments'=>$listCommentaire,'article'=>$article,'nbr'=>nbr));
     }
+    /**
+     * @Route("/afficherCommentaireback/{id}", name="afficherCommentaireBack")
+     */
+    public function afficherCommentairesParArticleBack($id){
+        $article= $this->getDoctrine()->getRepository(Article::class)->find($id);
+        $listCommentaire=$this->getDoctrine()->getRepository(Commentaire::class)->findBy(array('idArticle'=>$article));
+        $nbr=count($listCommentaire);
+        return $this->render('commentaire/afficher.html.twig',array('comments'=>$listCommentaire,'article'=>$article,'nbr'=>$nbr));
+    }
+    /**
+     * @Route("/deletecommentaire/{id}", name="supprimerCommentaire")
+     */
+    public function deleteCommentaire($id){
+        $em=$this->getDoctrine()->getManager();
+        $commentToRemove= $this->getDoctrine()->getRepository(Commentaire::class)->find($id);
+        $em->remove($commentToRemove);
+        $em->flush();
+        return $this->redirectToRoute('affichage_blog_Back');
+
+    }
 }

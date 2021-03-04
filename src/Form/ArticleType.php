@@ -20,7 +20,7 @@ class ArticleType extends AbstractType
             ->add('titre')
             ->add('description',TextareaType::class)
             ->add('image',FileType::class)
-            ->add('Ajouter',SubmitType::class)
+
         ;
     }
 

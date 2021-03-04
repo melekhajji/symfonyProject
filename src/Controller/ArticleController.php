@@ -49,7 +49,7 @@ class ArticleController extends AbstractController
             catch(FileException $e){}
             $em->persist($article);
             $em->flush();
-            return $this->redirectToRoute('affichage_blog');
+            return $this->redirectToRoute('affichage_blog_Back');
         }
 
         return $this->render('article/ajouterArticle.html.twig', array(
@@ -62,6 +62,13 @@ class ArticleController extends AbstractController
     public function afficherArticle(){
         $listArticle=$this->getDoctrine()->getRepository(Article::class)->findAll();
         return $this->render('front/blog.html.twig',array('articles'=>$listArticle));
+    }
+    /**
+     * @Route("/afficherback", name="affichage_blog_Back")
+     */
+    public function afficherArticleBack(){
+        $listArticle=$this->getDoctrine()->getRepository(Article::class)->findAll();
+        return $this->render('article/afficherArticleBack.html.twig',array('articles'=>$listArticle));
     }
 
     /**
@@ -82,9 +89,11 @@ class ArticleController extends AbstractController
         $articleToRemove= $this->getDoctrine()->getRepository(Article::class)->find($id);
         $em->remove($articleToRemove);
         $em->flush();
-        return $this->redirectToRoute("affichage_blog");
+        return $this->redirectToRoute("affichage_blog_Back");
     }
-
+    /**
+     * @Route("/modifier/{id}", name="modifier_article")
+     */
     public function modifierArticle(Request $req, $id) {
         $em=$this->getDoctrine()->getManager();
         $articleToModify=$this->getDoctrine()->getRepository(Article::class)->find($id);
@@ -92,13 +101,12 @@ class ArticleController extends AbstractController
             try{
                 $articleToModify->setTitre($req->get('titre'));
                 $articleToModify->setDescription($req->get('description'));
-                $articleToModify->setImage($req->get('image'));
                 $em->merge($articleToModify);
                 $em->flush();
-                return $this->redirectToRoute('affichage_blog');
+                return $this->redirectToRoute('affichage_blog_Back');
             }
             catch(Error $e){}
         }
-        return $this->render('modifierArticle.html.twig',array('article'=>$articleToModify));
+        return $this->render('article/modifierArticle.html.twig',array('article'=>$articleToModify));
     }
 }
