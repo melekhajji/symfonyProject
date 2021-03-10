@@ -1,0 +1,65 @@
+<style type="text/css">
+    .btn-like {
+        color:black
+    }
+.liked {
+    color: royalblue;
+}
+    </style>
+<div class="container">
+    <div class="row">
+        <h3> {{ article.titre }} </h3>
+    </div>
+    <div class="row">
+         {{ article.description|nl2br }}
+    </div>
+
+    <a class="row" style="margin-top: 15px">
+        <a href ="{{ path('article_Like_Unlike') }}" id="article-like"
+           data-entity-id="{{ article.id }}"
+           data-liked="{{ isArticleAlreadyLiked == true ? '1' : '0' }}"
+           class="btn-like">&nbsp;
+            <i class="far fa-thumbs-up {{ isArticleAlreadyLiked == true ? 'liked' : ''}}">
+            {{ isArticleAlreadyLiked == true ? 'Unlike' : 'Like'  }}
+            </i>
+    </a>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+        $(document).on('click' , "#article-like" , function (e){
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var entityId = $(this).attr('data-entity-id');
+
+            var isLiked = $(this).attr('data-liked');
+            if (isLiked === "0") {
+                $(this).attr('data-liked', 1);
+                $('.fa-thumbs-up').addClass('liked').text('Unlike')
+            }else{
+                $(this).attr('data-liked', 0);
+                $('.fa-thumbs-up').removeClass('liked').text('Like')
+            }
+            $.ajax({
+                type : 'POST',
+                dataType: 'json',
+                data: {'entityId': entityId },
+                url: url,
+                success: function () {
+                    console.log("Success");
+                },
+                error: function () {
+
+                }
+            });
+            }
+        );
+    </script>

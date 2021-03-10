@@ -36,7 +36,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link"href="{{ url('affichage_blog_Back') }}">
+                    <a class="sidebar-link"href="{{ url('article2') }}">
                         <i class="align-middle" data-feather="user"></i> <span class="align-middle">Liste des article</span>
                     </a>
                 </li>
@@ -228,7 +228,10 @@
                 </ul>
             </div>
         </nav>
-
+        {{ form_start(searchArticle) }}
+        {{ form_widget(searchArticle) }}
+        <button type="submit" style="text-align: end">Search</button>
+        {{ form_end(searchArticle) }}
         <main class="content">
             <div class="container-fluid p-0">
 

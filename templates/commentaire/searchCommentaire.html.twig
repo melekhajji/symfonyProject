@@ -228,10 +228,7 @@
                 </ul>
             </div>
         </nav>
-        {{ form_start(searchCommentaire) }}
-        {{ form_widget(searchCommentaire) }}
-        <button type="submit" style="text-align: end">Search</button>
-        {{ form_end(searchCommentaire) }}
+
         <main class="content">
             <div class="container-fluid p-0">
 
@@ -241,7 +238,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Cet article possède {{ nbr }} commentaires</h5>
+                            <h5 class="card-title"></h5>
                         </div>
                         <table class="table">
                             <thead>
@@ -256,7 +253,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% for a in comments %}
+                            {% for a in resultOfSearch %}
                                 <tr>
                                     <td>{{ a.name }}</td>
                                     <td>{{a.email  }}</td>

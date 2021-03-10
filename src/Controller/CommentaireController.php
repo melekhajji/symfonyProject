@@ -9,7 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\SearchCommentaireType;
+use App\Repository\CommentaireRepository;
 
+use App\Repository\ArticleRepository;
 class CommentaireController extends AbstractController
 {
     /**
@@ -57,14 +60,32 @@ class CommentaireController extends AbstractController
         $nbr=count($listCommentaire);
         return $this->render('front/blog-single.html.twig',array('comments'=>$listCommentaire,'article'=>$article,'nbr'=>nbr));
     }
+
     /**
      * @Route("/afficherCommentaireback/{id}", name="afficherCommentaireBack")
      */
-    public function afficherCommentairesParArticleBack($id){
+    public function afficherCommentairesParArticleBack($id,Request $request, CommentaireRepository $repository)
+    {
+
         $article= $this->getDoctrine()->getRepository(Article::class)->find($id);
         $listCommentaire=$this->getDoctrine()->getRepository(Commentaire::class)->findBy(array('idArticle'=>$article));
         $nbr=count($listCommentaire);
-        return $this->render('commentaire/afficher.html.twig',array('comments'=>$listCommentaire,'article'=>$article,'nbr'=>$nbr));
+
+
+        //search
+        $searchForm = $this->createForm(SearchCommentaireType::class);
+        $searchForm->handleRequest($request);
+        if ($searchForm->isSubmitted()) {
+            $message = $searchForm->getData()->getMessage();
+            $resultOfSearch = $repository->searchCommentaire($message);
+            return $this->render('commentaire/searchCommentaire.html.twig', array(
+                "resultOfSearch" => $resultOfSearch,
+                "searchCommentaire" => $searchForm->createView()));
+        }
+        return $this->render('commentaire/afficher.html.twig', array(
+
+            'comments'=>$listCommentaire,'article'=>$article,'nbr'=>$nbr,
+            "searchCommentaire" => $searchForm->createView()) );
     }
     /**
      * @Route("/deletecommentaire/{id}", name="supprimerCommentaire")

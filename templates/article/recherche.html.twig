@@ -36,7 +36,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link"href="{{ url('affichage_blog_Back') }}">
+                    <a class="sidebar-link"href="{{ url('article2') }}">
                         <i class="align-middle" data-feather="user"></i> <span class="align-middle">Liste des article</span>
                     </a>
                 </li>
@@ -228,61 +228,71 @@
                 </ul>
             </div>
         </nav>
-        {{ form_start(searchCommentaire) }}
-        {{ form_widget(searchCommentaire) }}
-        <button type="submit" style="text-align: end">Search</button>
-        {{ form_end(searchCommentaire) }}
+
         <main class="content">
             <div class="container-fluid p-0">
 
-                <h1 class="h3 mb-3">Tables</h1>
+                <div class="card-header"> Liste des Articles </div>
+                <h1>Recherche Article  </h1>
+                <br>
+                Rechercher: <input type="text" id="recherche">
 
-                <div class="row">
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Cet article possède {{ nbr }} commentaires</h5>
-                        </div>
-                        <table class="table">
+                    <div class="tableau">
+                        <table class="table" >
                             <thead>
-                            <tr>
-                                <th style="width:25%;">Nom</th>
-                                <th style="width:25%">Email</th>
-                                <th style="width:25%">site web</th>
-                                <th style="width:40%">Commentaire</th>
+                        <tr>
+                            <th style="width:40%;">Titre</th>
+                            <th style="width:40%">Description</th>
 
-                                <th class="d-none d-md-table-cell" style="width:25%">Date de Publication
-                                <th >Supprimer</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for a in comments %}
-                                <tr>
-                                    <td>{{ a.name }}</td>
-                                    <td>{{a.email  }}</td>
-                                    <td>{{a.website  }}</td>
-                                    <td>{{a.message  }}</td>
+                            <th class="d-none d-md-table-cell" style="width:25%">Date de Publication
+                            <th style="width:40%;">Image</th>
+                            <th >Actions</th>
+                        </tr>
+                        </thead>
 
-                                    <td>{{ a.createdAt|date('D-M-y h:m') }}</td>
+                                {% for article in articles %}
+                                    <tr>
+                                        <td>{{ article.titre }}</td>
+                                        <td>{{article.description  }}</td>
+                                        <td>{{ article.createdAt|date('D-M-y h:m') }}</td>
+                                        <td class="d-none d-md-table-cell"> <img src=" {{ asset('Uploads/Image/' ~ article.image) }}" height="100" width="100"></td>
+                                        <td class="table-action">
+                                            <a href="{{ url('modifier_article',{'id':article.id}) }}" ><i class="align-right" data-feather="edit-2"></i></a>
+                                            <a href="{{ url('delete_blog',{'id':article.id}) }}"><i class="align-middle" data-feather="trash"></i></a>
+                                            <a href="{{ url('afficherCommentaireBack',{'id':article.id}) }}"><i class="fa fa-comment"></i></a>
+                                        </td>
+                                    </tr>
 
-                                    <td class="table-action">
 
-                                        <a href="{{ url('supprimerCommentaire',{'id':a.id}) }}"><i class="align-middle" data-feather="trash"></i></a>
 
-                                    </td>
-                                </tr>
-                            {% endfor %}
-
-                            </tbody>
+                        {% endfor %}
                         </table>
                     </div>
-                </div>
             </div>
-
-
-
-
         </main>
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                                <script >
+                                    $(function () {
+                                        $("#recherche").keyup(function () {
+                                            $.ajax({
+                                                url : "{{ path('article2') }}",
+                                                data : { 'article' : $(this).val() }
+                                            }).done(function (response) {
+                                                var tableau = $(response).find("table");
+                                                $('.tableau').empty();
+                                                $('.tableau').append(tableau);
+                                            });
+                                        });
+                                    })
+                                </script>
+
+
+
+
+
+
+
 
         <footer class="footer">
             <div class="container-fluid">
@@ -314,8 +324,10 @@
     </div>
 </div>
 
+
 <script src="{{ asset('js/app.js')}}"></script>
 
 </body>
 
 </html>
+

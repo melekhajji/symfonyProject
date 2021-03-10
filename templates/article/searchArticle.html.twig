@@ -36,7 +36,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link"href="{{ url('affichage_blog_Back') }}">
+                    <a class="sidebar-link"href="{{ url('article2') }}">
                         <i class="align-middle" data-feather="user"></i> <span class="align-middle">Liste des article</span>
                     </a>
                 </li>
@@ -228,10 +228,7 @@
                 </ul>
             </div>
         </nav>
-        {{ form_start(searchCommentaire) }}
-        {{ form_widget(searchCommentaire) }}
-        <button type="submit" style="text-align: end">Search</button>
-        {{ form_end(searchCommentaire) }}
+
         <main class="content">
             <div class="container-fluid p-0">
 
@@ -241,34 +238,30 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Cet article possède {{ nbr }} commentaires</h5>
+                            <h5 class="card-title">Liste des articles</h5>
                         </div>
                         <table class="table">
                             <thead>
                             <tr>
-                                <th style="width:25%;">Nom</th>
-                                <th style="width:25%">Email</th>
-                                <th style="width:25%">site web</th>
-                                <th style="width:40%">Commentaire</th>
+                                <th style="width:40%;">Titre</th>
+                                <th style="width:40%">Description</th>
 
                                 <th class="d-none d-md-table-cell" style="width:25%">Date de Publication
-                                <th >Supprimer</th>
+                                <th style="width:40%;">Image</th>
+                                <th >Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {% for a in comments %}
+                            {% for a in resultOfSearch %}
                                 <tr>
-                                    <td>{{ a.name }}</td>
-                                    <td>{{a.email  }}</td>
-                                    <td>{{a.website  }}</td>
-                                    <td>{{a.message  }}</td>
-
+                                    <td>{{ a.titre }}</td>
+                                    <td>{{a.description  }}</td>
                                     <td>{{ a.createdAt|date('D-M-y h:m') }}</td>
-
+                                    <td class="d-none d-md-table-cell"> <img src=" {{ asset('Uploads/Image/' ~ a.image) }}" height="100" width="100"></td>
                                     <td class="table-action">
-
-                                        <a href="{{ url('supprimerCommentaire',{'id':a.id}) }}"><i class="align-middle" data-feather="trash"></i></a>
-
+                                        <a href="{{ url('modifier_article',{'id':a.id}) }}" ><i class="align-right" data-feather="edit-2"></i></a>
+                                        <a href="{{ url('delete_blog',{'id':a.id}) }}"><i class="align-middle" data-feather="trash"></i></a>
+                                        <a href="{{ url('afficherCommentaireBack',{'id':a.id}) }}"><i class="fa fa-comment"></i></a>
                                     </td>
                                 </tr>
                             {% endfor %}

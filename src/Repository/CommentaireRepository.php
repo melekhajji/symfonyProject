@@ -47,4 +47,12 @@ class CommentaireRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function searchCommentaire($message)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.message LIKE :message')
+            ->setParameter('message', '%'.$message.'%')
+            ->getQuery()
+            ->execute();
+    }
 }

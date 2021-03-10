@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\ArticleLike;
 use App\Entity\Commentaire;
 use App\Form\ArticleType;
+use App\Repository\ArticleRepository;
+use App\Form\SearchArticleType;
 use Doctrine\DBAL\Driver\SQLSrv\Exception\Error;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -34,7 +37,7 @@ class ArticleController extends AbstractController
         $form=$this->createForm(ArticleType::class,$article);
         $today=new \DateTime();
         $article->setCreatedAt($today);
-        $form->handleRequest($req);
+        $form->handleRequest($req); //recuperer les varibales du formulaires
         if($form->isSubmitted() && $form->isValid()){
             $file=$article->getImage();
             $fileName=md5(uniqid()).'.'.$file->guessExtension();
@@ -49,9 +52,9 @@ class ArticleController extends AbstractController
             catch(FileException $e){}
             $em->persist($article);
             $em->flush();
-            return $this->redirectToRoute('affichage_blog_Back');
+            return $this->redirectToRoute('article2');// thzk l affichage
         }
-
+// kn moch valid u submitted tarja3 l formulaire ta ajout
         return $this->render('article/ajouterArticle.html.twig', array(
             'form' => $form->createView()
         ));
@@ -63,14 +66,31 @@ class ArticleController extends AbstractController
         $listArticle=$this->getDoctrine()->getRepository(Article::class)->findAll();
         return $this->render('front/blog.html.twig',array('articles'=>$listArticle));
     }
+
     /**
      * @Route("/afficherback", name="affichage_blog_Back")
      */
-    public function afficherArticleBack(){
-        $listArticle=$this->getDoctrine()->getRepository(Article::class)->findAll();
-        return $this->render('article/afficherArticleBack.html.twig',array('articles'=>$listArticle));
-    }
+    public function  afficherArticleBack(Request $request, ArticleRepository $repository)
+    {
 
+        $articles = $repository->findAll();
+
+
+        //search
+        $searchForm = $this->createForm(SearchArticleType::class);
+        $searchForm->handleRequest($request);
+        if ($searchForm->isSubmitted()) {
+            $titre = $searchForm->getData()->getTitre();
+            $resultOfSearch = $repository->searchArticle($titre);
+            return $this->render('article/searchArticle.html.twig', array(
+                "resultOfSearch" => $resultOfSearch,
+                "searchArticle" => $searchForm->createView()));
+        }
+        return $this->render('article/afficherArticleBack.html.twig', array(
+            "articles" => $articles,
+
+            "searchArticle" => $searchForm->createView()));
+    }
     /**
      * @Route("/afficherOne/{id}", name="affichageSingleblog")
      */
@@ -89,7 +109,7 @@ class ArticleController extends AbstractController
         $articleToRemove= $this->getDoctrine()->getRepository(Article::class)->find($id);
         $em->remove($articleToRemove);
         $em->flush();
-        return $this->redirectToRoute("affichage_blog_Back");
+        return $this->redirectToRoute("article2");
     }
     /**
      * @Route("/modifier/{id}", name="modifier_article")
@@ -102,11 +122,48 @@ class ArticleController extends AbstractController
                 $articleToModify->setTitre($req->get('titre'));
                 $articleToModify->setDescription($req->get('description'));
                 $em->merge($articleToModify);
-                $em->flush();
-                return $this->redirectToRoute('affichage_blog_Back');
+    $em->flush();
+                return $this->redirectToRoute('article2');// yarjalii l affichage b donée jdod
             }
             catch(Error $e){}
         }
         return $this->render('article/modifierArticle.html.twig',array('article'=>$articleToModify));
     }
+
+
+
+
+    /**
+     * @Route("/article2", name="article2")
+     */
+    public function affichage(Request $request){
+        $search =$request->query->get('article');
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+
+        $articles = $repo->findMulti($search);
+
+        return $this->render('article/recherche.html.twig',
+            ["articles" => $articles]);
+
+
+
+
+    }
+
+
+
+
+    /**
+     * @Route("/show/{id}", name="show_blog", methods={"GET"})
+     */
+    public function showArticle(Article $article): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $isArticleAlreadyLiked = $em->getRepository(ArticleLike::class)->countByBlog($article);
+        return $this->render('front/blog2.html.twig',
+            ["article" => $article,
+                "isArticleAlreadyLiked" => $isArticleAlreadyLiked]);
+    }
+
+
 }
