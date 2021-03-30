@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+{% block title %}khadamni{% endblock %}
+{% block container %}
+    {% block name %}QUIZ{% endblock %}
+
+
+    <form method="post" action="{{ path('FiltrerQuizF') }}">
+    <h5>nombre de questions</h5>
+        <div>
+        <input type="number" placeholder="Nombre de questions minimum" name="nbMin" value="0">
+        <input type="number" placeholder="Nombre de questions maximum" name="nbMax" value="100">
+    </div>
+    <div>
+    <h5>Durée</h5>
+        <input type="number" placeholder="durée minimum" name="dureeMin" value="0">
+        <input type="number" placeholder="durée maximum" name="dureeMax" value="100">
+    </div>
+        <div>
+            <input type="submit" value="Filtrer">
+        </div>
+    </form>
+
+
+
+    <div class="section search" style="width: 100%;">
+        <h2 class="title">Rechercher</h2>
+        <form action="{{ path('searchAll') }}" method="post">
+            <input type="text" id="recherche" style="width: 80%;" name="mot" class="input is-default" placeholder="Search..."><button  style="float: right;width: 20%; height: 100%;" type="submit" class="button primary-button"><i class="fa fa-search"></i> </button>
+        </form>
+        <ul id="entitiesNav">
+            <div>
+                <a href="#" class="title" style="font-size: small">Resultat de la recherche<span class="fa arrow"></span> </a>
+
+            </div>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            $("#recherche").keyup(function(){/* recupère le contenue de l'input recherche */
+                var minlength=1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if(value.length>=minlength){
+                    $.ajax({
+                        url: "{{ path('search') }}",
+                        method: "GET",
+                        data: {
+                            'q': value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            if(value===$(that).val()){
+                                var result =JSON.parse(msg);
+                                $.each(result, function(key,arr){
+                                    $.each(arr, function(id,value){
+                                        if (key==='posts'){
+                                            if (id!=='error'){
+                                                entitySelector.append('<div style="cursor: pointer;position: relative;"><a href="/Quiz/'+id+'">'+'<b class="title" style="font-size: small;position: relative;bottom: 15px;">'+value[0]+'</b></a></div>');
+                                            }else{
+                                                entitySelector.append('<div class="errorLi" style="font-size: small">'+value+'</div>')
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+
+        {% for q in quizs %}
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <th>Thématique :</th>
+                    <h5 class="card-title"> {{ q.theme }}</h5>
+                    <th>Durée :</th>
+                    <h5 class="card-title"> {{ q.duree }}</h5>
+                    <th>Nombre des questions :</th>
+                    <h5 class="card-title"> {{ q.nbquestion }}</h5>
+                    <a href="/Quiz/{{ q.id }}" class="btn btn-primary">Commencer</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+    <div class="pagination">
+        {{ knp_pagination_render(quizs) }}
+    </div>
+    </div>
+{% endblock %}

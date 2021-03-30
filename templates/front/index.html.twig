@@ -1,0 +1,44 @@
+{% extends 'back.html.twig' %}
+{% block title%} Liste des Question{% endblock %}
+
+
+{% block container %}
+    {% if questions %}
+        <table id="questions" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Thematique</th>
+                <th>Enoncé</th>
+                <th>choix1</th>
+                <th>choix2</th>
+                <th>choix3</th>
+                <th>Reponse</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td>{{ question.quiz.theme }}</td>
+                    <td>{{ question.enonce }}</td>
+                    <td>{{ question.choix1 }}</td>
+                    <td>{{ question.choix2 }}</td>
+                    <td>{{ question.choix3 }}</td>
+                    <td>{{ question.reponse }}</td>
+
+                    <td>
+                        <a href="/admin/modifierQuestion/{{ question.id }}" class="btn btn-dark">Modifier</a>
+                        <a href="/deleteQustion/{{ question.id }}" class="btn btn-danger"
+                           onclick="return confirm('Etes-vous sûr de supprimer cet question?');">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun Question</p>
+    {% endif %}
+    </br>
+    <a href="/admin/ajouterQuestion" >Ajouter Une Question</a>
+{% endblock %}
