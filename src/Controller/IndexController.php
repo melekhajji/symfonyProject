@@ -28,7 +28,7 @@ class IndexController extends AbstractController
     public function home()
     {
         $questions = $this->getDoctrine()->getRepository(Question::class)->findAll();
-        return $this->render('front/index.html.twig', ['questions' => $questions]);
+        return $this->render('questions/admin/affichage.html.twig', ['questions' => $questions]);
     }
 
 
@@ -71,8 +71,30 @@ class IndexController extends AbstractController
             $request->query->getInt('page', 1)/*page number*/,
             2/*limit per page*/
         );
-        return $this->render('front/affichageQuiz.html.twig', ['quizs' => $quizs]);
+        return $this->render('quiz/front/affichage.html.twig', ['quizs' => $quizs]);
     }
+
+
+    /**
+     * @Route("/searchAllb/",name="searchAllb")
+     */
+    public function searchAllb(Request $request, PaginatorInterface $paginator)
+    {
+        $questions = $this->getDoctrine()->getRepository(Quiz::class)->findAllLike($_POST['mot']);
+        if (!isset($_POST['mot']))
+            $questions = $this->getDoctrine()->getRepository(Quiz::class)->findAll();
+        $quizs = $paginator->paginate(
+            $questions, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+        return $this->render('quiz/admin/affichage.html.twig', ['quizs' => $quizs]);
+    }
+
+
+
+
+
 
 
     /**
@@ -97,22 +119,13 @@ class IndexController extends AbstractController
 
             return $this->redirectToRoute('questionlist');
         }
-        return $this->render('questions/new.html.twig', ['form' => $form->createView()]);
+        return $this->render('questions/admin/new.html.twig', ['form' => $form->createView()]);
     }
 
 
 
 
-    /**
-     * @Route("/admin/detailQuestion/{id}", name ="questionShow")
-     */
 
-    public function show($id)
-    {
-        $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
-
-        return $this->render('questions/show.html.twig', array('question' => $question));
-    }
 
     /**
      * @Route("/admin/modifierQuestion/{id}", name="modifierQuestion")
@@ -136,7 +149,7 @@ class IndexController extends AbstractController
             return $this->redirectToRoute('questionlist');
         }
 
-        return $this->render('questions/edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('questions/admin/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -176,7 +189,7 @@ class IndexController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('listQuiz');
         }
-        return $this->render('questions/newQuiz.html.twig', ['form' => $form->createView()]);
+        return $this->render('questions/admin/newQuiz.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -187,7 +200,7 @@ class IndexController extends AbstractController
     {
 
         $quizs = $this->getDoctrine()->getRepository(Quiz::class)->findAll();
-        return $this->render('quiz/index.html.twig', ['quizs' => $quizs]);
+        return $this->render('quiz/admin/affichage.html.twig', ['quizs' => $quizs]);
     }
 
 
@@ -229,7 +242,7 @@ class IndexController extends AbstractController
             return $this->redirectToRoute('listQuiz');
         }
 
-        return $this->render('questions/editQuiz.html.twig', ['form' => $form->createView()]);
+        return $this->render('quiz/admin/editQuiz.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -257,14 +270,14 @@ class IndexController extends AbstractController
             $request->query->getInt('page', 1)/*page number*/,
             2/*limit per page*/
         );
-        return $this->render('front/affichageQuiz.html.twig', ['quizs' => $quizs]);
+        return $this->render('quiz/front/affichage.html.twig', ['quizs' => $quizs]);
     }
 
     /**
-     * @Route("/FiltrerQuizF",name="FiltrerQuizF")
+     * @Route("/FiltrerQuizb",name="FiltrerQuizb")
      */
 
-    public function FiltrerQuizF(Request $request, PaginatorInterface $paginator)
+    public function FiltrerQuizb(Request $request, PaginatorInterface $paginator)
     {
         $quizs1 = $this->getDoctrine()->getRepository(Quiz::class)->findAllBy($_POST['dureeMin'], $_POST['dureeMax'], $_POST['nbMin'], $_POST['nbMax']);
         $quizs = $paginator->paginate(
@@ -272,7 +285,7 @@ class IndexController extends AbstractController
             $request->query->getInt('page', 1)/*page number*/,
             2/*limit per page*/
         );
-        return $this->render('front/affichageQuiz.html.twig', ['quizs' => $quizs]);
+        return $this->render('quiz/admin/affichage.html.twig', ['quizs' => $quizs]);
     }
 
     /**
@@ -283,7 +296,7 @@ class IndexController extends AbstractController
 
     public function detailQuizF($id,Request $request): Response
     {
-        $quiz = $this->getDoctrine()->getRepository(Quiz::class)->find($id);;
+        $quiz = $this->getDoctrine()->getRepository(Quiz::class)->find($id);
         $Questionrep = $this->getDoctrine()->getRepository(Question::class)->findOneBy(array('quiz' => $id));
 
         $que = new Question();
@@ -298,18 +311,18 @@ class IndexController extends AbstractController
             $data = $form["reponse"]->getData();
             if($data==$Questionrep->getReponse())
             {
-                //ken s7i7
-                var_dump($quiz->getNbquestion());
+
+                return $this->render('valide.html.twig', ['quiz' => $quiz,'form' => $form->createView()]);
 
             }
             else
             {
-                //ken 8alet
 
+                return $this->render('nvalide.html.twig', ['quiz' => $quiz,'form' => $form->createView()]);
             }
 
         }
-        return $this->render('front/quizF.html.twig', ['quiz' => $quiz,'form' => $form->createView()]);
+        return $this->render('quiz/front/affichageQuiz.html.twig', ['quiz' => $quiz,'form' => $form->createView()]);
     }
 
 
@@ -325,7 +338,7 @@ class IndexController extends AbstractController
     public function Triquiz (Request $request, QuizRepository $repository)
     {
         $quizs = $repository->orderByTheme();
-        return $this->render('quiz/index.html.twig', array( "quizs" => $quizs,));
+        return $this->render('quiz/admin/affichage.html.twig', array( "quizs" => $quizs,));
     }
 
 }

@@ -20,9 +20,9 @@ class QuestionType extends AbstractType
             ->add('choix3')
             ->add('reponse')
             ->add('quiz',EntityType::class,
-            array('class'=>Quiz::class,
-                'choice_label'=>'theme',
-                'disabled'=>false)
+             array('class'=>Quiz::class,
+              'choice_label'=>'theme',
+             'disabled'=>false)
 
             )
         ;

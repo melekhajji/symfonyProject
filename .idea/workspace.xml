@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39914db2-53e9-4d71-b92f-238912169f80" name="Default Changelist" comment="" />
+    <list default="true" id="39914db2-53e9-4d71-b92f-238912169f80" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/quiz/front/affichageQuiz.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/QuestionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/QuestionType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/affichageQuiz.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/base.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/quizF.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/questions/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/questions/admin/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/questions/editQuiz.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/quiz/admin/editQuiz.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/questions/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/questions/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/questions/admin/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/questions/newQuiz.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/questions/admin/newQuiz.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/questions/show.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/quiz/index.html.twig" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,6 +158,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\PIDev\templates" />
+      <recent name="C:\wamp64\www\PIDev\templates\quiz\front" />
+      <recent name="C:\wamp64\www\PIDev\templates\front" />
+      <recent name="C:\wamp64\www\PIDev\templates\quiz\admin" />
+      <recent name="C:\wamp64\www\PIDev\templates\questions\admin" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="s make:entity" />
@@ -173,7 +199,7 @@
       <workItem from="1616663002150" duration="8238000" />
       <workItem from="1616755526760" duration="1568000" />
       <workItem from="1617119410117" duration="36000" />
-      <workItem from="1617119472385" duration="4552000" />
+      <workItem from="1617119472385" duration="12557000" />
     </task>
     <servers />
   </component>

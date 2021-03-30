@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block name %}
+    <div class="section search" style="width: 100%;">
+        <h2 class="title">Vous avez échoué </h2>
+
+    <li class="sidebar-item">
+        <a class="sidebar-link" href="{{path('listQuizF') }}">
+            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Repasser le quiz </span>
+        </a>
+    </li>
+{% endblock %}
