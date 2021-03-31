@@ -1,0 +1,43 @@
+
+
+
+{% extends 'back.html.twig' %}
+{% block title %}liste formation{% endblock %}
+{% block container %}
+    <div class="main">
+
+
+<h4>Event:#{{ events.title }}_{{ events.lieu }}</h4>
+
+<h4>Formations of {{ events.title }}</h4>
+<div class="col-12 col-xl-6">
+    <div class="card">
+        <div class="card-header">
+            <table class="table table-striped" id="tableac">
+    <tr>
+
+        <th> Nom </th>
+        <th> Type </th>
+        <th> Duree </th>
+        <th> Prix </th>
+
+        <td>Action</td>
+    </tr>
+    {% for formation in formations %}
+        <tr>
+
+            {#   <td class="d-none d-md-table-cell">{{ consultation.dateC ? consultation.dateC|date('Y-m-d') : '' }}</td>#}
+            <td class="d-none d-md-table-cell"> {{ formation.nom  }}</td>
+            <td class="d-none d-md-table-cell"> {{ formation.type }}</td>
+            <td class="d-none d-md-table-cell"> {{ formation.duree}}</td>
+            <td class="d-none d-md-table-cell" > {{ formation.prix}} </td>
+
+
+            <td class="d-none d-md-table-cell" ><a href="{{ path('updateFormation',{'id':formation.id}) }}"><i class="align-middle" data-feather="edit-2" >Modifier</i></a>
+                <a href="{{ path('deleteFormation',{'id':formation.id}) }}"><i class="align-middle" data-feather="trash">Supprimer</i></a>
+
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'back.html.twig' %}
+{% block title %}liste Events{% endblock %}
+{% block container %}
+    <table border="1">
+<tr>
+
+    <th> Start</th>
+    <th > Lieu</th>
+    <th > Image</th>
+    <th > Title</th>
+    <th>End</th>
+    <th>Description</th>
+    <th>All_day</th>
+    <th>Capacité</th>
+
+
+                    <th> Supprimer </th>
+                    <th  > Modifier </th>
+                </tr>
+                {% for event in resultOfSearch %}
+                <tr >
+                    <td class="d-none d-md-table-cell">{{ event.start ? event.start|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="d-none d-md-table-cell">{{ event.lieu }}</td>
+                    <td  class="d-none d-md-table-cell"><img  style=" padding-right: 2px; padding-left: 2px;  width:60px ; hight: 60px ;" src="{{ asset('uploads/' ~ event.getImage())}}"></td>
+                    <td class="d-none d-md-table-cell">{{ event.title }}</td>
+                    <td class="d-none d-md-table-cell">{{ event.end ? event.end|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="d-none d-md-table-cell">{{ event.description }}</td>
+                    <td class="d-none d-md-table-cell">{{ event.allday ? 'Yes' : 'No' }}</td>
+                    <td class="d-none d-md-table-cell">{{ event.capacite }}</td>
+
+                    <td ><a href="{{path('deleteEvent',{'id':event.id }) }}"><i class="align-middle" data-feather="trash">Supprimer</i></a></td>
+                    <td width="100"
+                        height="100" ><a href="{{path('updateEvent',{'id':event.id }) }}"><i class="align-middle" data-feather="edit-2" >Modifier</i></a> </td>
+
+                    {% endfor %}
+                </tr>
+            </table>
+
+
+    {% endblock %}

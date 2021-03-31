@@ -1,0 +1,101 @@
+{% extends 'back.html.twig' %}
+{% block title %}Détails Events{% endblock %}
+{% block container %}
+
+<div class="card-body ">
+    <div class="mb-3">
+
+    <div class="card-header">
+        <h5 class="card-title">Détails Users</h5>
+        <table  class="table" >
+            <tr class="col-12 col-xl-6">
+
+        <tr>
+            <th>Id</th>
+            <th><i class="icon_mail_alt"></i>Email</th>
+            <th>Roles</th>
+            <th>Password</th>
+            <th>Cin</th>
+            <th>Username</th>
+
+
+
+
+                <th> Actions</th>
+
+
+
+        </tr>
+
+
+        {% for user in users %}
+            <tr>
+                <td class="d-none d-md-table-cell">{{ user.id }}</td>
+                <td class="d-none d-md-table-cell">{{ user.email }}</td>
+                <td class="d-none d-md-table-cell">{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td class="d-none d-md-table-cell">{{ user.password }}</td>
+                <td class="d-none d-md-table-cell">{{ user.cin }}</td>
+                <td class="d-none d-md-table-cell">{{ user.username }}</td>
+
+                <td>
+                    <a href="{{ path('users_edit', {'id': user.id}) }}"><i class="align-middle" data-feather="edit-2" >Modifier</i></a>
+                    <a href="{{ path('users_delete', {'id': user.id}) }}"><i class="align-middle" data-feather="trash">Supprimer</i></a>
+                   <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
+
+                </td>
+
+
+
+            </tr>
+
+
+        {% endfor %}
+        </table>
+    </div>
+</div>
+
+<div class="mb-3">
+    <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Trie par:
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{path('listUsersTrieCIN') }}">Trier par CIN</a>
+            <a class="dropdown-item" href="{{path('liste_User_Tree') }}">Trier par Email</a>
+
+        </div>
+    </div>
+    <style>
+        button {
+            color: #FFFFFF;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+        button:hover {
+            color: #FFFFFF;
+            opacity: 0.8;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+        button:active {
+            color: #FFFFFF;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+
+    </style>
+    <div class="card-body text-center">
+        <div class="mb-3">
+
+            <a  href="{{path('users_new') }}"> <button class="btn btn-danger"><i class="fas fa-check"></i> Ajouter un utilisateur</button></a>
+
+        </div>
+        <br>
+    </div>
+
+
+
+    {% endblock %}

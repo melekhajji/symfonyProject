@@ -1,0 +1,155 @@
+{% extends 'back.html.twig' %}
+{% block title %}liste formation{% endblock %}
+{% block container %}
+<div class="main">
+    <h1>recherche simple</h1>
+{{ form_start(searchFormation) }}
+{{ form_widget(searchFormation) }}
+     <div class="card-body ">
+        <div class="mb-3">
+
+            <button type="submit"class="btn btn-pill btn-danger">Search</button>
+
+        </div>
+    </div>
+
+
+
+
+{{ form_end(searchFormation) }}
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    {# rechercher avancée #}
+
+    <form class="d-none d-sm-inline-block">
+        <div class="input-group input-group-navbar">
+    <input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+        </div></form>
+< class="col-12 col-xl-6">
+    <div class="card">
+        <div class="card-header">
+    <h1 class="card-title">Liste des Formations</h1>
+    <table class="table table-striped" id="tableac">
+        <tr>
+
+            <th> Nom </th>
+            <th> Type </th>
+            <th> Duree </th>
+            <th> Prix </th>
+
+            <th> Event</th>
+            <th> Actions </th>
+            <th> PDF </th>
+
+
+        </tr>
+        {% for formation in formations %}
+            <tr>
+
+              {#   <td class="d-none d-md-table-cell">{{ consultation.dateC ? consultation.dateC|date('Y-m-d') : '' }}</td>#}
+                <td class="d-none d-md-table-cell"> {{ formation.nom  }}</td>
+                <td class="d-none d-md-table-cell"> {{ formation.type }}</td>
+                <td class="d-none d-md-table-cell"> {{ formation.duree}}</td>
+                <td class="d-none d-md-table-cell" > {{ formation.prix}} </td>
+
+                <td class="d-none d-md-table-cell" > {{ formation.event}}</td>
+                <td class="d-none d-md-table-cell" ><a href="{{ path('updateFormation',{'id':formation.id}) }}"><i class="align-middle" data-feather="edit-2" >Modifier</i></a>
+               <a href="{{ path('deleteFormation',{'id':formation.id}) }}"><i class="align-middle" data-feather="trash">Supprimer</i></a>
+
+                </td>
+                <script>
+                    $(document).ready(function(){
+                        $('#search').keyup(function(){
+                            search_table($(this).val());
+                        });
+                        function search_table(value){
+                            $('#tableac tbody tr').each(function(){
+                                var found = 'false';
+                                $(this).each(function(){
+                                    if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                                    {
+                                        found = 'true';
+                                    }
+                                });
+                                if(found == 'true')
+                                {
+                                    $(this).show();
+
+                                }
+                                else
+                                {
+                                    $(this).hide();
+
+                                }
+                            });
+                        }
+                    });
+                </script>
+                {#  qrcode
+                <img style=" background-color: white;position: center;" src="data:image/png;base64,
+       {{ barcode({code: 'le nom de l article et son contenu : '~formation.nom~' '~formation.type~'
+        '~formation.prix~'  '~formation.capacite~'  '~formation.duree~'
+        ',  type: 'qrcode', format: 'png', width: 10, height: 10, color: [255, 0, 0]}) }}
+                                                                " />
+#}
+                {% endfor %}
+
+
+                <td class="d-none d-md-table-cell" ><a href="{{ path('default') }}"><i class="align-middle" data-feather="file">PDF</i></a></td>
+            </tr>
+
+
+    </table>
+
+            <div class="mb-3">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Trie par:
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{path('TriPA') }}">Prix</a>
+
+                        <a class="dropdown-item" href="{{path('TriD') }}">Durée</a>
+                        <a class="dropdown-item" href="{{path('TriT') }}">Type</a>
+                        <a class="dropdown-item" href="{{path('TriN') }}">Nom</a>
+                    </div>
+                </div>
+
+
+   {# <div  align ="center"><a  href="{{path('default') }}"><button class="button" >pdf</button></a> </div>
+
+    <a href="{{ path('default') }}"><i class="align-middle" data-feather="file">PDF</i></a> #}
+
+            <div class="card-body text-center">
+                <div class="mb-3">
+
+                    <a  href="{{path('addFormation') }}"> <button class="btn btn-danger"><i class="fas fa-check"></i> Ajouter une formation</button></a>
+
+                </div>
+
+
+{#
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4">
+                            <p class="mb-0">Trie par:</p>
+                            <div class="dropdown-menu mb-2" style="position:static;display:block;">
+                                <a class="dropdown-item" href="{{path('TriPA') }}">Prix</a>
+                                <a class="dropdown-item" href="{{path('TriA') }}">Capacité</a>
+
+                            </div></div>
+
+#}
+
+</div></div></div></div>
+
+    <div class="navigation">
+
+        {{ knp_pagination_render(formations) }}
+    </div>
+
+
+
+</div>
+{% endblock %}
+
+

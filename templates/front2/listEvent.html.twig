@@ -1,0 +1,116 @@
+{% extends 'base2.html.twig' %}
+{% block title %}liste Events{% endblock %}
+{% block container %}
+{% block name %}Events{% endblock %}
+<br>
+
+
+    <style>
+        .boutonmenuprincipal {
+            background-color: #e83737;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding:20px;
+            margin-top:20px;
+            font-size: 20px;
+        }
+        .boutonmenuprincipal:hover {
+            background-color: #ff4444;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-child {
+            display: none;
+            background-color: #f28c8c;
+            min-width: 50px;
+        }
+        .dropdown-child a {
+            color: white;
+            padding: 20px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown:hover .dropdown-child {
+            display: block;
+        }
+    </style>
+
+
+    <div class="dropdown">
+        <button class="boutonmenuprincipal">Tri par</button>
+        <div class="dropdown-child">
+            <a href="{{path('TriCapacite2') }}">Capacité</a>
+            <a href="{{path('TristartF2') }}">Start</a>
+            <a href="{{path('TriLieu2') }}">Lieu</a>
+            <a href="{{path('TriTitle2') }}">Titre</a>
+            <a href="{{path('Triend2') }}">End</a>
+            <a href="{{path('TriDescription2') }}">Description</a>
+        </div>
+    </div>
+
+    {% for event in listEvent %}
+<section class="blog_area section-padding">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+
+                <div class="blog_left_sidebar">
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+
+                            <img class="card-img rounded-0"  src="{{ asset('uploads/' ~ event.getImage())}}" alt="">
+                            <a href="#" class="blog_item_date">
+                                <h3>{{ event.start|date('m')  }}</h3>
+                                <p>{{ event.start|date('F')  }}</p>
+                            </a>
+                        </div>
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="#">
+                                <h2>{{ event.title }}</h2>
+                            </a>
+                            <p>{{ event.description }}</p>
+                            <p>Capacité: {{ event.capacite }}</p>
+                            <ul class="blog-info-link">
+                                <li><a href="{{path('MAPPED2',{'id':event.id }) }}"><i class="fa fa-user"></i> Localisation</a></li>
+                                <li><a href="{{ path('frontshow2',{'id':event.id}) }}"><i class="fa fa-comments"></i> Formations</a></li>
+                                <li><a href="{{ path('pdff4') }}"><i class="fa fa-comments"></i> PDF</a></li>
+
+                            </ul>
+
+                        </div>
+                    </article></div>  </div>
+
+
+
+    {% endfor %}
+
+<div class="col-lg-4">
+    <div class="blog_right_sidebar">
+
+        <aside class="single_sidebar_widget search_widget">
+            <form action="#">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder='Search Keyword'
+                               onfocus="this.placeholder = ''"
+                               onblur="this.placeholder = 'Search Keyword'">
+                        <div class="input-group-append">
+                            <button class="btn" type="button"><i class="ti-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                        type="submit">Search</button>
+            </form>
+        </aside>
+
+
+    </div></div></div></div></section>
+    <nav class="blog-pagination justify-content-center d-flex">
+        {{ knp_pagination_render(listEvent) }}
+    </nav>
+{% endblock %}

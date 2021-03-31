@@ -1,0 +1,129 @@
+{% extends 'back.html.twig' %}
+
+{% block container %}
+
+    <h1 align="center"> offres</h1>
+    <form method="post" action="{{ path('rechercheOb') }}">
+        <label>Recherche</label>
+        <input type="text" name="searchOb"><input type="submit" value="Recherche">
+    </form>
+
+<div class="card-body ">
+    <div class="mb-3">
+
+        <div class="card-header">
+            <h5 class="card-title">Détails offres</h5>
+            <table  class="table" >
+                <tr class="col-12 col-xl-6">
+            <th width="70"
+                height="70" align="center">ID </th>
+
+            <th width="70"
+                height="70" align="center"> titre </th>
+
+            <th width="70"
+                height="70" align="center"> entreprise </th>
+
+            <th width="70"
+                height="70" align="center"> adresse </th>
+
+            <th width="70"
+                height="70" align="center"> postes_vacants </th>
+
+            <th width="70"
+                height="70" align="center"> type_contrat </th>
+
+            <th width="70"
+                height="70" align="center"> experience </th>
+
+            <th width="70"
+                height="70" align="center"> remuneration </th>
+
+            <th width="70"
+                height="70" align="center"> langues </th>
+
+            <th width="70"
+                height="70" align="center"> description </th>
+
+            <th width="70"
+                height="70" align="center"> date_expiration </th>
+
+            <th width="70"
+                height="70" align="center"> action </th>
+
+
+        </tr>
+        {% for offre in listoffreb %}
+        <tr>
+            <td width="70"
+                height="70" align="center"> {{offre.id}}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.titre }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.entreprise }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.adresse }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.PostesVacants }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.typecontrat }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.experience }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.remuneration }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.langues }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.description }}</td>
+            <td  width="70"
+                 height="70"align="center">{{ offre.dateexpiration|date('Y-m-d') }}</td>
+
+            <td width="70"
+                height="70">   <a href="{{path('supprimerb',{'id':offre.id }) }}"><i class="align-middle" data-feather="trash">Delete</i></a><br>
+
+               <a href="{{path('modifieroffreb',{'id':offre.id }) }}"><i class="align-middle" data-feather="edit-2" >Update</i></a>   </td>
+
+            {% endfor %}
+
+        </tr>
+
+
+
+
+
+
+
+    </table>
+    <br></br>
+            <style>
+                button {
+                    color: #FFFFFF;
+                    background-color: #d11414;
+                    border-color: #d11414;
+                    border-radius: 6px;
+                }
+                button:hover {
+                    color: #FFFFFF;
+                    opacity: 0.8;
+                    background-color: #d11414;
+                    border-color: #d11414;
+                    border-radius: 6px;
+                }
+                button:active {
+                    color: #FFFFFF;
+                    background-color: #d11414;
+                    border-color: #d11414;
+                    border-radius: 6px;
+                }
+
+            </style>
+            <div class="card-body text-center">
+                <div class="mb-3">
+
+                    <a  href="{{path('ajouteroffrea') }}"> <button class="btn btn-danger"><i class="fas fa-check"></i> Ajouter un event</button></a>
+
+                </div>
+                <br>
+            </div>
+
+{% endblock %}

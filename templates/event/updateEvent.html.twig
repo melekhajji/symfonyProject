@@ -1,0 +1,33 @@
+{% extends 'back.html.twig' %}
+{% block container %}
+
+    <style>
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+
+        }
+    </style>
+    <h1 style ="margin-bottom: 2%; text-align: center; color: #090536 ;  " > Modifer Event  </h1>
+
+    {{ form_start(formModevent ,{'attr':{'novalidate':'novalidate'}}) }}
+    <div class="mb-3">{{ form_label(formModevent,"start") }}</div>
+    <div class="mb-3">{{ form_label(formModevent,"lieu") }}</div>
+
+    <div class="mb-3"> {{ form_label(formModevent,"image") }}))</div>
+    <div class="mb-3"> {{ form_label(formModevent,"title") }}))</div>
+    <div class="mb-3"> {{ form_label(formModevent,"end") }}))</div>
+    <div class="mb-3"> {{ form_label(formModevent,"description") }}))</div>
+    <div class="mb-3"> {{ form_label(formModevent,"allday") }}))</div>
+    <div class="mb-3"> {{ form_label(formModevent,"capacite") }}))</div>
+
+    {{ form_widget(formModevent) }}
+    {{ form_end(formModevent) }}
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<section class="pricing spad">
+
+    <div class="container">
+        <div class="row">
+            {% for Event in Event %}
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="pricing__item">
+                        <div class="pricing__item__title">
+                            <p>{{ Event.Type}}</p>
+                            <h3>{{ Event.NomEvent}} <span>{{ Event.nomEndroit}}</span></h3>
+                        </div>
+                        <ul>
+                            <li>
+                                <h6>Nb_place_max</h6>
+                                <span>{{ Event.nbPlaceMax}}</span>
+                            </li>
+                            <li>
+                                <h6>lieu_depart</h6>
+                                <span>{{ Event.LieuDepart }}</span>
+                            </li>
+                            <li>
+                                <h6>date_depart</h6>
+                                <span>{{ Event.DateDepart|date('Y-m-d')}}</span>
+
+                            </li>
+                        </ul>
+                        <a href="/new5/{{ client.id }}/{{ Event.id }}" class="primary-btn">Reserver</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+
+
+</section>

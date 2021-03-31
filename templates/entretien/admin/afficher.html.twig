@@ -1,0 +1,102 @@
+{% extends 'back.html.twig' %}
+{% block container %}
+    <h1 align="center"> Entretiens</h1>
+    <form method="post" action="{{ path('rechercheb') }}">
+        <label>Recherche</label>
+        <input type="text" name="search"><input type="submit" value="Recherche">
+    </form>
+    <div class="card-body ">
+    <div class="mb-3">
+
+    <div class="card-header">
+    <h5 class="card-title">Détails Entretiens</h5>
+    <table  class="table" >
+        <tr class="col-12 col-xl-6">
+            <th width="100"
+                height="100" align="center">ID </th>
+
+            <th width="100"
+                height="100" align="center"> ID_Offre </th>
+
+            <th width="100"
+                height="100" align="center"> Date_Entretien </th>
+
+            <th width="100"
+                height="100" align="center"> Type_Entretien </th>
+
+            <th width="100"
+                height="100" align="center"> Adresse </th>
+
+
+
+
+
+            <th width="100"
+                height="100" align="center"> delete </th>
+            <th width="100"
+                height="100" align="center"> update </th>
+
+        </tr>
+        {% for entretien in listentretienb %}
+        <tr>
+            <td width="100"
+                height="100" align="center"> {{entretien.id}}</td>
+            <td  width="100"
+                 height="100"align="center">{{ entretien.Offre.id }}</td>
+            <td  width="100"
+                 height="100"align="center">{{ entretien.DateEntretien|date('Y-m-d') }}</td>
+            <td  width="100"
+                 height="100"align="center">{{ entretien.TypeEntretien }}</td>
+            <td  width="100"
+                 height="100"align="center">{{ entretien.Adresse }}</td>
+
+
+            <td width="100"
+                height="100">   <a href="{{path('supprimerentretienb',{'id':entretien.id }) }}"><i class="align-middle" data-feather="trash">Delete</i></a>                              </td>
+            <td width="100"
+                height="100">   <a href="{{path('modifierentretienb',{'id':entretien.id }) }}"><i class="align-middle" data-feather="edit-2" >Update</i></a>   </td>
+
+
+            {% endfor %}
+
+        </tr>
+
+
+
+
+
+
+
+    </table>
+
+    <style>
+        button {
+            color: #FFFFFF;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+        button:hover {
+            color: #FFFFFF;
+            opacity: 0.8;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+        button:active {
+            color: #FFFFFF;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+
+    </style>
+    <div class="card-body text-center">
+        <div class="mb-3">
+
+            <a  href="{{path('ajouterEntretienb') }}"> <button class="btn btn-danger"><i class="fas fa-check"></i> Ajouter un Entretien</button></a>
+
+        </div>
+        <br>
+    </div>
+{% endblock %}

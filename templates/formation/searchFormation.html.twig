@@ -1,0 +1,39 @@
+
+
+
+{% extends 'back.html.twig' %}
+{% block title %}liste formation{% endblock %}
+{% block container %}
+
+
+<table border="1">
+    <tr>
+
+        <th> Nom </th>
+        <th> Type </th>
+        <th> Duree </th>
+        <th> Prix </th>
+
+        <th> Event</th>
+        <th> Actions </th>
+
+
+    </tr>
+    {% for formations in resultOfSearch %}
+        <tr>
+
+            <td > {{ formations.nom  }}</td>
+            <td > {{ formations.type }}</td>
+            <td > {{ formations.duree}}</td>
+            <td  > {{ formations.prix}} </td>
+
+            <td  > {{ formations.event }}</td>
+            <td class="d-none d-md-table-cell" ><a href="{{ path('updateFormation',{'id':formations.id}) }}"><i class="align-middle" data-feather="edit-2" >Modifier</i></a>
+                <a href="{{ path('deleteFormation',{'id':formations.id}) }}"><i class="align-middle" data-feather="trash">Supprimer</i></a> </td>
+
+
+
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

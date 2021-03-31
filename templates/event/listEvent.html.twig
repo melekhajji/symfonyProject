@@ -1,0 +1,163 @@
+{% extends 'back.html.twig' %}
+{% block title %}Détails Events{% endblock %}
+{% block container %}
+{{ form_start(searchEvent) }}
+{{ form_widget(searchEvent) }}
+<div class="card-body ">
+    <div class="mb-3">
+
+        <button type="submit"class="btn btn-pill btn-danger">Search</button>
+
+    </div>
+</div>
+
+
+{{ form_end(searchEvent) }}
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    {# rechercher avancée #}
+
+
+            <input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+
+
+    <div class="card" >
+        <div class="card-header">
+            <h5 class="card-title">Détails Event</h5>
+    <table  class="table"id="tableac" >
+        <tr class="col-12 col-xl-6">
+
+
+            <th> Start</th>
+            <th > Lieu</th>
+            <th > Image</th>
+            <th > Title</th>
+            <th>End</th>
+            <th>Description</th>
+            <th>All_day</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Capacité</th>
+            <th> Supprimer </th>
+            <th width="90"
+                height="90" > Modifier </th>
+
+            <th> Formations </th>
+            <th>Localisation</th>
+
+            <th> PDF </th>
+
+
+        </tr>
+        {% for event in events %}
+        <tr >
+
+            <td class="d-none d-md-table-cell"> {{ event.start|date('d-m-Y H:i:s')  }}</td>
+            <td class="d-none d-md-table-cell">{{ event.lieu }}</td>
+            <td  class="d-none d-md-table-cell"><img  style=" padding-right: 2px; padding-left: 2px;  width:100px ; hight: 80px ;" src="{{ asset('uploads/' ~ event.getImage())}}"></td>
+            <td class="d-none d-md-table-cell">{{ event.title }}</td>
+            <td class="d-none d-md-table-cell"> {{ event.end|date('d-m-Y H:i:s')  }}</td>
+            <td class="d-none d-md-table-cell">{{ event.description }}</td>
+            <td class="d-none d-md-table-cell">{{ event.allday ? 'Yes' : 'No' }}</td>
+
+            <td class="d-none d-md-table-cell">{{ event.lat }}</td>
+            <td class="d-none d-md-table-cell">{{ event.lon}}</td>
+            <td class="d-none d-md-table-cell">{{ event.capacite }}</td>
+
+
+            <td ><a href="{{path('deleteEvent',{'id':event.id }) }}"><i class="align-middle" data-feather="trash">Supprimer</i></a></td>
+            <td width="100"
+                height="100" ><a href="{{path('updateEvent',{'id':event.id }) }}"><i class="align-middle" data-feather="edit-2" >Modifier</i></a>
+            </td>
+            <td ><a href="{{ path('showFormation',{'id':event.id}) }}">Show</a></td>
+            <td  ><a href="{{path('MAPPEDb',{'id':event.id }) }}"><i class="align-middle" data-feather="map" >Map</i></a>
+            </td>
+
+            <script>
+                $(document).ready(function(){
+                    $('#search').keyup(function(){
+                        search_table($(this).val());
+                    });
+                    function search_table(value){
+                        $('#tableac tbody tr').each(function(){
+                            var found = 'false';
+                            $(this).each(function(){
+                                if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                                {
+                                    found = 'true';
+                                }
+                            });
+                            if(found == 'true')
+                            {
+                                $(this).show();
+
+                            }
+                            else
+                            {
+                                $(this).hide();
+
+                            }
+                        });
+                    }
+                });
+            </script>
+
+
+            {% endfor %}
+
+            <td class="d-none d-md-table-cell" ><a href="{{ path('pdf') }}"><i class="align-middle" data-feather="file">PDF</i></a></td>
+        </tr>
+    </table>
+        </div>
+    </div>
+
+<div class="mb-3">
+    <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Trie par:
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{path('TriS') }}">Start</a>
+            <a class="dropdown-item" href="{{path('TriL') }}">Lieu</a>
+            <a class="dropdown-item" href="{{path('Tri') }}">Title</a>
+            <a class="dropdown-item" href="{{path('TriE') }}">End</a>
+            <a class="dropdown-item" href="{{path('TriDescription') }}">Description</a>
+            <a class="dropdown-item" href="{{path('TriCap') }}">Capacité</a>
+        </div>
+    </div>
+    <style>
+        button {
+            color: #FFFFFF;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+        button:hover {
+            color: #FFFFFF;
+            opacity: 0.8;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+        button:active {
+            color: #FFFFFF;
+            background-color: #d11414;
+            border-color: #d11414;
+            border-radius: 6px;
+        }
+
+    </style>
+<div class="card-body text-center">
+    <div class="mb-3">
+
+        <a  href="{{path('ajouterEvent') }}"> <button class="btn btn-danger"><i class="fas fa-check"></i> Ajouter un event</button></a>
+
+    </div>
+    <br>
+</div>
+    <div  align="center">
+
+        {{ knp_pagination_render(events) }}
+    </div>
+
+
+{% endblock %}

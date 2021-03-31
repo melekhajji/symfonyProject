@@ -1,0 +1,85 @@
+{% extends 'base2.html.twig' %}
+
+{% block container %}
+    {% block title %}Détails Entretien{% endblock %}
+    {% block name %}Détails Entretien{% endblock %}
+<form method="post" action="{{ path('rechercheO') }}">
+    <label>Recherche</label>
+    <input type="text" name="searchO"><input type="submit" value="Recherche">
+</form>
+<table border="2" align="center" id="box1">
+    <tr>
+
+
+        <th width="100"
+            height="100" align="center"> titre </th>
+
+        <th width="100"
+            height="100" align="center"> entreprise </th>
+
+        <th width="100"
+            height="100" align="center"> adresse </th>
+
+        <th width="100"
+            height="100" align="center"> postes_vacants </th>
+
+        <th width="100"
+            height="100" align="center"> type_contrat </th>
+
+        <th width="100"
+            height="100" align="center"> experience </th>
+
+        <th width="100"
+            height="100" align="center"> remuneration </th>
+
+        <th width="100"
+            height="100" align="center"> langues </th>
+
+        <th width="100"
+            height="100" align="center"> description </th>
+
+        <th width="100"
+            height="100" align="center"> date_expiration </th>
+
+
+    </tr>
+    {% for offre in listoffre %}
+    <tr>
+
+        <td  width="100"
+             height="100"align="center">{{ offre.titre }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.entreprise }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.adresse }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.PostesVacants }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.typecontrat }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.experience }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.remuneration }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.langues }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.description }}</td>
+        <td  width="100"
+             height="100"align="center">{{ offre.dateexpiration|date('Y-m-d') }}</td>
+
+
+
+
+        {% endfor %}
+
+    </tr>
+
+
+
+
+
+
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,149 @@
+
+            {% block body %}
+                <html>
+                <head>
+                    <style>
+                        /**
+                            Set the margins of the page to 0, so the footer and the header
+                            can be of the full height and width !
+                         **/
+                        @page {
+                            margin: 0cm 0cm;
+                        }
+
+                        /** Define now the real margins of every page in the PDF **/
+                        body {
+                            margin-top: 2cm;
+                            margin-left: 2cm;
+                            margin-right: 2cm;
+                            margin-bottom: 2cm;
+                        }
+
+                        /** Define the header rules **/
+                        header {
+
+                            position: fixed;
+                            top: 0cm;
+                            left: 0cm;
+                            right: 0cm;
+                            height: 2cm;
+
+                            /** Extra personal styles **/
+                            background-color:#FFE4C4;
+                            color: white;
+                            text-align: center;
+                            line-height: 1.5cm;
+                        }
+
+                        /** Define the footer rules **/
+                        footer {
+                            position: fixed;
+                            bottom: 0cm;
+                            left: 0cm;
+                            right: 0cm;
+                            height: 2cm;
+
+                            /** Extra personal styles **/
+                            background-color: #FFE4C4;
+                            color: white;
+                            text-align: center;
+                            line-height: 1.5cm;
+                        }
+                        h2 {
+                            color: deepskyblue ;
+                            text-align: center;
+                        }
+                        thead{
+                            background-color: #FFE4C4;
+                        }
+                    </style>
+                    <img src="n.png" width="100%" height="100%"/>
+                </head>
+
+
+
+                <body>
+                <!-- Define header and footer blocks before your content -->
+                <header>
+                    <h1> Khadamni </h1>
+
+
+                </header>
+
+                <footer>
+                    tel: 98457698   <?php echo date("Y");?>
+                </footer>
+
+                <!-- Wrap the content of your PDF inside a main tag -->
+
+
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div class="card">
+
+
+                            <div class="card-header card-header-primary">
+                                <h1 style ="margin-bottom: 2%; text-align: center; color:#F08080;  " > Détails Event </h1>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                        <tr>
+
+
+
+                                            <th> Start</th>
+                                            <th > Lieu</th>
+                                            <th > Image</th>
+                                            <th > Title</th>
+                                            <th>End</th>
+                                            <th>Description</th>
+                                            <th>All_day</th>
+                                            <th>Capacité</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for event in events %}
+
+                                            <tr>
+
+
+                                                <td > {{ event.start|date('d-m-Y H:i:s')  }}</td>
+                                                <td >{{ event.lieu }}</td>
+                                                <td  ><img  src="{{ asset('uploads/' ~ event.getImage())}}"></td>
+                                                <td >{{ event.title }}</td>
+                                                <td > {{ event.end|date('d-m-Y H:i:s')  }}</td>
+                                                <td >{{ event.description }}</td>
+                                                <td >{{ event.allday ? 'Yes' : 'No' }}</td>
+                                                <td >{{ event.capacite }}</td>
+
+                                            </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+                </div>
+                </body>
+                </html>
+
+
+
+
+            {%  endblock %}
+
+

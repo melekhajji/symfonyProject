@@ -1,0 +1,47 @@
+{% extends 'base2.html.twig' %}
+{% block title %}Formations{% endblock %}
+{% block container %}
+    {% block name %}Formations{% endblock %}
+    <body align="center" >
+    <div class="slider-area ">
+        <section class="recent-case-area section-padding30">
+
+
+    <!-- Nav Card -->
+
+
+
+        {% for formation in listFormation %}
+    <!-- Card two -->
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="container">
+            <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-6">
+        <div class="single-practice mb-30">
+            <div class="practice-img">
+                <img src="{{asset('frontbundle/assets/img/legal/legal_1.png')}}" alt="">
+
+                <div class="practice-icon">
+                    <span>{{ formation.prix}} dt</span>
+                </div>
+            </div>
+            <div class="practice-caption2">
+                <h4>{{ formation.nom  }}</h4>
+                <p>Type :{{ formation.type }}</p>
+                <p> Durée:{{ formation.duree}} Heures</p>
+
+                <a href="{{path('default4') }}" class="read-more1">PDF</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+{% endfor %}
+            </div></section></div>
+
+
+        {{ knp_pagination_render(listFormation) }}
+</body>
+{% endblock %}
+

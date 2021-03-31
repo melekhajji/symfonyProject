@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block title %}liste Events{% endblock %}
+{% block container %}
+    {% block name %}Events{% endblock %}
+
+        <br>
+
+
+
+        {% for event in resultOfSearch %}
+            <section class="blog_area section-padding">
+
+            <div class="container">
+            <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+
+                <div class="blog_left_sidebar">
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+
+                            <img class="card-img rounded-0"  src="{{ asset('uploads/' ~ event.getImage())}}" alt="">
+                            <a href="#" class="blog_item_date">
+                                <h3>{{ event.start|date('m')  }}</h3>
+                                <p>{{ event.start|date('F')  }}</p>
+                            </a>
+                        </div>
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="#">
+                                <h2>{{ event.title }}</h2>
+                            </a>
+                            <p>{{ event.description }}</p>
+
+                            <p>Capacité :{{ event.capacite }}</p>
+                            <ul class="blog-info-link">
+                                <li><a href="{{path('MAPPED',{'id':event.id }) }}"><i class="fa fa-user"></i> Localisation</a></li>
+                                <li><a href="{{ path('frontshow',{'id':event.id}) }}"><i class="fa fa-comments"></i> Formations</a></li>
+                                <li><a href="{{ path('pdff') }}"><i class="fa fa-comments"></i> PDF</a></li>
+
+                                <li>
+                                    <a href="/new5/{{ app.session.get('login') }}/{{ event.id }}" class="primary-btn">Reserver</a></li>
+
+
+
+                            </ul>
+
+                        </div>
+                    </article></div>  </div>
+
+
+
+        {% endfor %}
+
+
+
+            </div></div></section>
+
+    {% endif %}
+{% endblock %}

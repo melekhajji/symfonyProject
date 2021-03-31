@@ -1,0 +1,115 @@
+
+
+<style type="text/css">
+
+    #box1
+    {
+
+
+        background-color: rgba(255,255,255,0.6);
+        border: 3px solid grey ;
+
+
+
+    }
+    #box1:hover
+    {
+        transition: box-shadow 0.6s linear,background-color 0.6s linear;
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0px 0px 10px #fff;
+    }
+
+
+
+    .feu { font: bold 2.5em Arial Black, sans-serif;
+        text-align: center;
+        letter-spacing: 1px
+        /* basic font setting */
+        color: #cc3700;
+
+    }
+    #e{
+
+        border-radius: 50%;
+
+    }
+
+    body {
+        color: #00008b;
+
+    }
+    input {
+        padding: 15px 100px;
+        margin:10px 4px;
+        cursor: pointer;
+        text-transform: uppercase;
+        text-align: center;
+        position: relative;
+    }
+    input:hover {
+        opacity:0.5;}
+
+</style>
+
+{% block cc %}
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
+    <link href="{{ asset('backoffice/css/app.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.5.1/main.css" integrity="sha256-/rB/IDulpFpJSHjrUgRHzB99AnJh3RBNrUOpF+4QIKA=" crossorigin="anonymous">
+{% endblock %}
+<div>
+
+                <h1  align="center"  class="feu">Liste des Formations</h1>
+    <div class="list-group">
+        <a href="#" class="list-group-item">
+            <div class="row g-0 align-items-center">
+                <div class="col-2">
+                    <i class="text-danger" data-feather="alert-circle"></i>
+                </div>
+                <div class="col-10">
+                <table  id="box1">
+                    <tr>
+
+                        <th> Nom </th>
+                        <th> Type </th>
+                        <th> Duree </th>
+                        <th> Prix </th>
+
+                        <th> Event </th>
+
+
+                    </tr>
+                    {% for formation in formations %}
+                    <tr>
+                        <td > {{ formation.nom  }}</td>
+                        <td> {{ formation.type }}</td>
+                        <td> {{ formation.duree}}</td>
+                        <td> {{ formation.prix}} </td>
+
+                        <td> {{ formation.event }}</td>
+
+
+                        {% endfor %}
+
+                    </tr>
+
+
+                </table>
+
+
+<br>
+</div>
+            </div></a></div></div>
+
+{% block javascripts %}
+
+    <script src="{{ asset('app.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.js" integrity="sha256-AM67JiNJ27oZIs55VNRBo6vAVVQ1iwg1PDN94mdDZA8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.5.1/main.min.js" integrity="sha256-9puLsDK3mkUV8FSsGLlSRT+uJogUINfaCq56mzSUP/w=" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+
+
+
+
+
+
+
+<h5 >Détails Event</h5>
+<table  border="1"  >
+    <tr >
+
+
+        <th> Start</th>
+        <th > Lieu</th>
+        <th > Image</th>
+        <th > Title</th>
+        <th>End</th>
+        <th>Description</th>
+        <th>All_day</th>
+
+
+
+
+    </tr>
+    {% for event in events %}
+    <tr >
+
+        <td > {{ event.start|date('d-m-Y H:i:s')  }}</td>
+        <td >{{ event.lieu }}</td>
+        <td  ><img  src="{{ asset('uploads/' ~ event.getImage())}}"></td>
+        <td >{{ event.title }}</td>
+        <td > {{ event.end|date('d-m-Y H:i:s')  }}</td>
+        <td >{{ event.description }}</td>
+        <td >{{ event.allday ? 'Yes' : 'No' }}</td>
+        <td >{{ event.capacite }}</td>
+
+
+
+        {% endfor %}
+    </tr>
+</table>
+
+
+

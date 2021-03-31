@@ -1,0 +1,55 @@
+
+
+{% extends 'base.html.twig' %}
+{% block title %}Offre{% endblock %}
+{% block container %}
+    {% block name %}List Offre{% endblock %}
+    <body align="center" >
+    <div class="slider-area ">
+        <section class="recent-case-area section-padding30">
+
+
+            <!-- Nav Card -->
+
+
+
+            {% for offre in listoffre %}
+            <!-- Card two -->
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="single-practice mb-30">
+                                <div class="practice-img">
+                                    <img src="{{asset('frontbundle/assets/img/legal/legal_1.png')}}" alt="">
+
+                                    <div class="practice-icon">
+                                        <span>{{ offre.entreprise}} </span>
+                                    </div>
+                                </div>
+                                <div class="practice-caption2">
+                                    <h4>{{ offre.titre  }}</h4>
+                                    <p>Adresse :{{ offre.adresse }}</p>
+                                    <p> Postes Vancants:{{ offre.PostesVacants }}</p>
+                                    <p>Type Contrat :{{ offre.typecontrat }}</p>
+                                    <p> Expèrience:{{ offre.experience }}</p>
+                                    <p>Rémuneration :{{ offre.remuneration }}</p>
+                                    <p> langues:{{ offre.langues }}</p>
+                                    <p> Dsecription:{{ offre.description }}</p>
+                                    <p> Date expiration:{{ offre.dateexpiration|date('Y-m-d') }}</p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div></section></div>
+
+
+
+    </body>
+{% endblock %}
+

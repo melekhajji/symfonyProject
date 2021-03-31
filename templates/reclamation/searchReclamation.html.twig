@@ -1,0 +1,11 @@
+{% for rec in resultOfSearch %}
+<tr>
+    <td>{{ rec.id }}</td>
+    <td>{{ rec.commentaire }}</td>
+    <td>{{ rec.type }}</td>
+    <td>{{ rec.createdAt|date }}</td>
+    <td>{{ rec.etat }}</td>
+    <td>{{ rec.user }}</td>
+    <td><a href="{{ path('updateReclamation',{'id':rec.id}) }}">Update</a>
+        <a href="{{ path('deleteReclamation',{'id':rec.id}) }}">Delete</a>
+    </td>

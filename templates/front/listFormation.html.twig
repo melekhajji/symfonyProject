@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+{% block title %}Formations{% endblock %}
+{% block container %}
+    {% block name %}Formations{% endblock %}
+    <body align="center" >
+    <div class="slider-area ">
+        <section class="recent-case-area section-padding30">
+
+
+
+            <style>
+                .boutonmenuprincipal {
+                    background-color: #e83737;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    padding:20px;
+                    margin-top:20px;
+                    font-size: 20px;
+                }
+                .boutonmenuprincipal:hover {
+                    background-color: #ff4444;
+                }
+                .dropdown {
+                    position: relative;
+                    display: inline-block;
+                }
+                .dropdown-child {
+                    display: none;
+                    background-color: #f28c8c;
+                    min-width: 50px;
+                }
+                .dropdown-child a {
+                    color: white;
+                    padding: 20px;
+                    text-decoration: none;
+                    display: block;
+                }
+                .dropdown:hover .dropdown-child {
+                    display: block;
+                }
+            </style>
+
+
+            <div class="dropdown">
+                <button class="boutonmenuprincipal">Tri par</button>
+                <div class="dropdown-child">
+                    <a href="{{path('TriNom1') }}">Nom</a>
+                    <a href="{{path('TriType1') }}">Type</a>
+                    <a href="{{path('TriDuree1') }}">Durée</a>
+                    <a href="{{path('TriPrix1') }}">Prix</a>
+
+                </div>
+            </div>
+
+    <!-- Nav Card -->
+
+
+
+        {% for formation in listFormation %}
+    <!-- Card two -->
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="container">
+            <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-6">
+        <div class="single-practice mb-30">
+            <div class="practice-img">
+                <img src="{{ qr_code_url( formation.prix) }}" />
+
+
+                <div class="practice-icon">
+                    <span>{{ formation.duree}} H</span>
+                </div>
+            </div>
+            <div class="practice-caption2">
+                <h4>{{ formation.nom  }}</h4>
+                <p>Type :{{ formation.type }}</p>
+                <a href="{{path('default2') }}" class="read-more1">PDF</a>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+{% endfor %}
+            </div></section></div>
+
+
+        {{ knp_pagination_render(listFormation) }}
+</body>
+{% endblock %}
+

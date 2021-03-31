@@ -1,0 +1,68 @@
+{% extends 'back.html.twig' %}
+{% block title %}liste Events{% endblock %}
+ {% block container %}
+
+
+
+        <h1 class="h3 mb-3">Events</h1>
+
+        <div class="row">
+
+
+            <div class="col-12 col-md-6 col-lg-4">
+                {% for event in event %}
+                <div class="card">
+
+                    <img    alt="Unsplash"class="card-img-top" src="{{ asset('uploads/' ~ event.getImage())}}">
+
+                    <div class="card-header">
+                        <img src="{{ qr_code_url( event.title) }}" />
+
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">De{{ event.start|date('d-m-Y H:i:s')  }} jusqu'à  {{ event.start|date('d-m-Y H:i:s')  }}</li>
+                        <li class="list-group-item">{{ event.description }}</li>
+                        <li class="list-group-item">Lieu:{{ event.lieu }}</li>
+                        <li class="list-group-item">Capacité:{{ event.capacite}}</li>
+                    </ul>
+                </div>
+
+                    <script>
+                        $(document).ready(function(){
+                            $('#search').keyup(function(){
+                                search_table($(this).val());
+                            });
+                            function search_table(value){
+                                $('#tableac tbody tr').each(function(){
+                                    var found = 'false';
+                                    $(this).each(function(){
+                                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                                        {
+                                            found = 'true';
+                                        }
+                                    });
+                                    if(found == 'true')
+                                    {
+                                        $(this).show();
+
+                                    }
+                                    else
+                                    {
+                                        $(this).hide();
+
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+                {% endfor %}
+
+            </div>
+
+            </div>
+
+     <div class="pagination">
+         {{ knp_pagination_render(event) }}
+     </div>
+
+{% endblock %}

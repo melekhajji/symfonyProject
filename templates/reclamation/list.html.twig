@@ -1,0 +1,76 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Réclamation {% endblock %}
+{% block container %}
+
+    <div class="card-body ">
+        <div class="mb-3">
+
+            <div class="card-header">
+                <h5 class="card-title">Détails Réclamations</h5>
+                <table  class="table" >
+                    <tr class="col-12 col-xl-6">
+
+                                    <tr>
+                                        <td>Id</td>
+                                        <td>Commentaire</td>
+                                        <td>Type</td>
+                                        <td>Created_at</td>
+                                        <td>Etat</td>
+                                        <td>User</td>
+                                        <td>Action</td>
+
+                                    </tr>
+
+                    {% for rec in reclamations %}
+                    <tr>
+                        <td>{{ rec.id }}</td>
+                        <td>{{ rec.commentaire }}</td>
+                        <td>{{ rec.type }}</td>
+                        <td>{{ rec.createdAt|date }}</td>
+                        <td>{{ rec.etat }}</td>
+                        <td>{{ rec.user }}</td>
+                    <td><a href="{{ path('updateReclamation',{'id':rec.id}) }}"><i class="align-middle" data-feather="edit-2" >Update</i></a>
+                        <a href="{{ path('deleteReclamation',{'id':rec.id}) }}"><i class="align-middle" data-feather="trash">Delete</i></a>
+                                            </td>
+                    </tr> {% endfor %}
+                </table>
+
+
+
+        <div class="mb-3">
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Trie par:
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Trier par type</a>
+                    <a class="dropdown-item" href="#">Trier par Etat</a>
+
+                </div>
+            </div>
+            <style>
+                button {
+                    color: #FFFFFF;
+                    background-color: #d11414;
+                    border-color: #d11414;
+                    border-radius: 6px;
+                }
+                button:hover {
+                    color: #FFFFFF;
+                    opacity: 0.8;
+                    background-color: #d11414;
+                    border-color: #d11414;
+                    border-radius: 6px;
+                }
+                button:active {
+                    color: #FFFFFF;
+                    background-color: #d11414;
+                    border-color: #d11414;
+                    border-radius: 6px;
+                }
+
+            </style>
+
+
+            {% endblock %}
