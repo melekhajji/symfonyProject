@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="883.0" prefWidth="1438.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="event.BackController">
+   <children>
+      <AnchorPane fx:id="panemenu2" layoutX="20.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="880.0" prefWidth="1464.0">
+         <children>
+            <ImageView fitHeight="902.0" fitWidth="1473.0" layoutY="-11.0">
+               <image>
+                  <Image url="@../Image/7650.jpg" />
+               </image>
+               <effect>
+                  <Glow />
+               </effect>
+            </ImageView>
+            <Pane layoutX="-20.0" layoutY="-15.0" prefHeight="911.0" prefWidth="264.0" style="-fx-background-color: #222e3c;">
+               <children>
+                  <ImageView fitHeight="90.0" fitWidth="93.0" layoutX="76.0" layoutY="35.0">
+                     <image>
+                        <Image url="@../Image/loder.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnF" layoutX="-8.0" layoutY="328.0" mnemonicParsing="false" onAction="#interfaceformation" prefHeight="52.0" prefWidth="271.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Formation" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="-18.0" layoutY="376.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="281.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Quiz " textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="-8.0" layoutY="427.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="271.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Question" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="-18.0" layoutY="479.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="281.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Blog" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="interfaceE" layoutX="-6.0" layoutY="276.0" mnemonicParsing="false" onAction="#interfaceevent" prefHeight="52.0" prefWidth="270.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Event " textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Bt_Dashboard211111" layoutX="-7.0" layoutY="531.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="271.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Users" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Bt_Dashboard211112" layoutX="-7.0" layoutY="583.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="271.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Réclamations" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Bt_Dashboard211113" layoutX="-7.0" layoutY="635.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="271.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Offre" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Bt_Dashboard211114" layoutX="-17.0" layoutY="687.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="281.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Gestion Entretiens" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="front2" layoutX="-17.0" layoutY="739.0" mnemonicParsing="false" onAction="#front2" prefHeight="52.0" prefWidth="281.0" style="-fx-background-color: #222e3c; -fx-border-color: white;" text="Front" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+                  <Text fill="#f5eeee" fontSmoothingType="LCD" layoutX="3.0" layoutY="163.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="KHADAMNI" textAlignment="CENTER" wrappingWidth="248.9609375">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Text fill="#a40f0f" fontSmoothingType="LCD" layoutX="350.0" layoutY="492.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue" textAlignment="CENTER">
+               <font>
+                  <Font name="Bodoni MT Black Italic" size="66.0" />
+               </font>
+            </Text>
+            <Button fx:id="fermerbutton2" layoutX="1395.0" mnemonicParsing="false" onAction="#fermer" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #ce6767;" text="Fermer">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
