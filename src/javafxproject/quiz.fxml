@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -9,12 +10,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="551.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxproject.QuizController">
    <children>
       <Label layoutX="57.0" layoutY="26.0" text="Gestion des Quiz :" textFill="#da0c0c">
          <font>
-            <Font name="Baskerville Old Face" size="31.0" />
+            <Font name="Bodoni MT Black" size="31.0" />
          </font>
       </Label>
       <TabPane layoutX="6.0" layoutY="79.0" prefHeight="466.0" prefWidth="841.0" tabClosingPolicy="UNAVAILABLE">
@@ -23,7 +25,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tablequiz" layoutX="14.0" layoutY="14.0" onMouseClicked="#recupererquiz" prefHeight="418.0" prefWidth="311.0">
+                        <TableView fx:id="tablequiz" layoutX="14.0" layoutY="14.0" onMouseClicked="#recupererquiz" prefHeight="418.0" prefWidth="344.0">
                           <columns>
                             <TableColumn fx:id="Idquiz" prefWidth="75.0" text="ID" />
                             <TableColumn fx:id="Themequiz" prefWidth="75.0" text="Theme" />
@@ -31,12 +33,24 @@
                               <TableColumn fx:id="NbQuestionquiz" prefWidth="75.0" text="NbQuestion" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="ThemeText" layoutX="355.0" layoutY="55.0" prefHeight="37.0" prefWidth="152.0" promptText="Theme" />
-                        <TextField fx:id="dureeText" layoutX="355.0" layoutY="106.0" prefHeight="37.0" prefWidth="153.0" promptText="duree" />
-                        <TextField fx:id="nbquestionText" layoutX="355.0" layoutY="165.0" prefHeight="37.0" prefWidth="151.0" promptText="nbquestion" />
-                        <Button layoutX="342.0" layoutY="231.0" mnemonicParsing="false" onAction="#Ajouterquiz" prefHeight="25.0" prefWidth="65.0" text="Ajouter" />
-                        <Button layoutX="421.0" layoutY="231.0" mnemonicParsing="false" onAction="#Modifierquiz" prefHeight="25.0" prefWidth="66.0" text="Modifier" />
-                        <Button layoutX="506.0" layoutY="231.0" mnemonicParsing="false" onAction="#Supprimerquiz" text="Supprimer" />
+                        <TextField fx:id="ThemeText" layoutX="385.0" layoutY="50.0" prefHeight="37.0" prefWidth="152.0" promptText="Theme" />
+                        <TextField fx:id="dureeText" layoutX="384.0" layoutY="107.0" prefHeight="37.0" prefWidth="153.0" promptText="duree" />
+                        <TextField fx:id="nbquestionText" layoutX="386.0" layoutY="159.0" prefHeight="37.0" prefWidth="151.0" promptText="nbquestion" />
+                        <Button layoutX="363.0" layoutY="217.0" mnemonicParsing="false" onAction="#Ajouterquiz" prefHeight="25.0" prefWidth="65.0" text="Ajouter" textFill="#eb0c0c" />
+                        <Button layoutX="441.0" layoutY="217.0" mnemonicParsing="false" onAction="#Modifierquiz" prefHeight="25.0" prefWidth="66.0" text="Modifier" textFill="#d70d0d" />
+                        <Button layoutX="519.0" layoutY="217.0" mnemonicParsing="false" onAction="#Supprimerquiz" text="Supprimer" textFill="#e12222" />
+                        <TextField fx:id="rechercheTextQuiz" layoutX="567.0" layoutY="25.0" onKeyReleased="#RechercheQuiz" promptText="Entrez Votre Recherche" />
+                        <TextField fx:id="duree1" layoutX="567.0" layoutY="104.0" onKeyReleased="#FiltreRecherche" promptText="min" />
+                        <TextField fx:id="duree2" layoutX="567.0" layoutY="137.0" onKeyReleased="#FiltreRecherche" promptText="max" />
+                        <JFXButton layoutX="619.0" layoutY="295.0" onAction="#TrieParNq" text="Nombres des questions " textFill="#110000" />
+                        <JFXButton layoutX="623.0" layoutY="318.0" onAction="#TrieParduree" text="Durée" textFill="#1b0000" />
+                        <Label layoutX="569.0" layoutY="74.0" text="Filtrer les quiz : " />
+                        <Button fx:id="export" layoutX="654.0" layoutY="220.0" mnemonicParsing="false" onAction="#exportExcel" text="Excel" />
+                        <Text layoutX="497.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trier par :">
+                           <font>
+                              <Font name="Bodoni MT" size="24.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
             </content>
@@ -45,48 +59,31 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tablequestion" layoutX="14.0" layoutY="12.0" onMouseClicked="#recupererquestion" prefHeight="414.0" prefWidth="496.0">
+                        <TableView fx:id="tablequestion" layoutX="14.0" layoutY="12.0" onMouseClicked="#recupererquestion" prefHeight="414.0" prefWidth="517.0">
                           <columns>
                             <TableColumn fx:id="idquestion" prefWidth="75.0" text="ID" />
-                            <TableColumn fx:id="enoncequestion" prefWidth="75.0" text="Enoncé" />
-                              <TableColumn fx:id="choix1question" prefWidth="75.0" text="Choix1" />
-                              <TableColumn fx:id="choix2question" prefWidth="75.0" text="Choix2" />
+                            <TableColumn fx:id="IDquiz" prefWidth="75.0" text="ID_quiz" />
+                              <TableColumn fx:id="enoncequestion" prefWidth="75.0" text="enonce" />
+                              <TableColumn fx:id="choix1question" prefWidth="75.0" text="choix1" />
+                              <TableColumn fx:id="choix2question" prefWidth="75.0" text="choix2" />
                               <TableColumn fx:id="choix3question" prefWidth="75.0" text="Choix3" />
-                              <TableColumn fx:id="IDquiz" prefWidth="75.0" text="ID_quiz" />
+                              <TableColumn fx:id="reponsequestion" prefWidth="75.0" text="reponse" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="enonceText" layoutX="555.0" layoutY="32.0" prefHeight="35.0" prefWidth="165.0" promptText="enonce" />
-                        <TextField fx:id="choix1Text" layoutX="555.0" layoutY="91.0" prefHeight="33.0" prefWidth="165.0" promptText="choix1" />
-                        <TextField fx:id="choix2Text" layoutX="555.0" layoutY="138.0" prefHeight="36.0" prefWidth="165.0" promptText="choix2" />
-                        <TextField fx:id="choix3Text" layoutX="555.0" layoutY="194.0" prefHeight="35.0" prefWidth="168.0" promptText="choix3" />
-                        <TextField fx:id="idquizText" layoutX="553.0" layoutY="251.0" prefHeight="37.0" prefWidth="170.0" promptText="idquiz" />
-                        <Button layoutX="529.0" layoutY="322.0" mnemonicParsing="false" onAction="#Ajouterquestion" text="Ajouter" />
-                        <Button layoutX="603.0" layoutY="322.0" mnemonicParsing="false" onAction="#Modifierquestion" text="Modifier" />
-                        <Button layoutX="684.0" layoutY="322.0" mnemonicParsing="false" onAction="#Supprimerquestion" text="Supprimer" />
+                        <TextField fx:id="enonceText" layoutX="556.0" layoutY="95.0" prefHeight="35.0" prefWidth="165.0" promptText="enonce" />
+                        <TextField fx:id="choix1Text" layoutX="556.0" layoutY="154.0" prefHeight="33.0" prefWidth="165.0" promptText="choix1" />
+                        <TextField fx:id="choix2Text" layoutX="556.0" layoutY="208.0" prefHeight="36.0" prefWidth="165.0" promptText="choix2" />
+                        <TextField fx:id="choix3Text" layoutX="554.0" layoutY="256.0" prefHeight="35.0" prefWidth="168.0" promptText="choix3" />
+                        <TextField fx:id="idquizText" layoutX="550.0" layoutY="41.0" prefHeight="37.0" prefWidth="170.0" promptText="idquiz" />
+                        <Button layoutX="535.0" layoutY="360.0" mnemonicParsing="false" onAction="#Ajouterquestion" text="Ajouter" textFill="#e43131" />
+                        <Button layoutX="603.0" layoutY="360.0" mnemonicParsing="false" onAction="#Modifierquestion" text="Modifier" textFill="#e42727" />
+                        <Button layoutX="679.0" layoutY="360.0" mnemonicParsing="false" onAction="#Supprimerquestion" text="Supprimer" textFill="#da2d2d" />
+                        <TextField fx:id="reponseText" layoutX="553.0" layoutY="302.0" prefHeight="37.0" prefWidth="170.0" promptText="reponse" />
+                        <Button layoutX="648.0" layoutY="5.0" mnemonicParsing="false" onAction="#Imprimer" text="Imprimer" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Reponse">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tableReponse" layoutX="14.0" layoutY="14.0" onMouseClicked="#recupererreponse" prefHeight="409.0" prefWidth="240.0">
-                          <columns>
-                            <TableColumn fx:id="idreponse" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="libellereponse" prefWidth="75.0" text="Libelle" />
-                              <TableColumn fx:id="ID_question" prefWidth="75.0" text="ID_question" />
-                          </columns>
-                        </TableView>
-                        <TextField fx:id="libelleText" layoutX="278.0" layoutY="66.0" prefHeight="37.0" prefWidth="166.0" promptText="libelle" />
-                        <TextField fx:id="idquestionText" layoutX="278.0" layoutY="132.0" prefHeight="36.0" prefWidth="167.0" promptText="idquestion" />
-                        <Button layoutX="268.0" layoutY="206.0" mnemonicParsing="false" onAction="#Ajouterreponse" text="Ajouter " />
-                        <Button layoutX="353.0" layoutY="206.0" mnemonicParsing="false" onAction="#Modifierreponse" text="Modifier" />
-                        <Button layoutX="434.0" layoutY="206.0" mnemonicParsing="false" onAction="#Supprimerreponse" text="Supprimer" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
         </tabs>
       </TabPane>
    </children>

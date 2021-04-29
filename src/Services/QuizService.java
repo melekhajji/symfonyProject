@@ -50,6 +50,112 @@ public class QuizService {
         return QuizList;
     }
     
+    
+     public ObservableList<Quiz>Recherche(String saisie) {
+        
+        ObservableList<Quiz> QuizList=FXCollections.observableArrayList();
+        try {
+        connection = DBConnect.getConnect();
+            query = "SELECT * FROM `quiz`WHERE id LIKE '%"+saisie+"%' or duree LIKE '%"+saisie+"%' ";
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()){
+                QuizList.add(new  Quiz(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getInt(4)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        return QuizList;
+    }
+     
+  public ObservableList<Quiz>Filtrer(String duree1 , String duree2) {
+        
+        ObservableList<Quiz> QuizList=FXCollections.observableArrayList();
+        try {
+        connection = DBConnect.getConnect();
+            query = "SELECT * FROM `quiz` WHERE duree BETWEEN '"+duree1+"' AND '"+duree2+"' ";
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()){
+                QuizList.add(new  Quiz(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getInt(4)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  
+        
+        return QuizList;
+    }
+  
+  
+    public ObservableList<Quiz> Trienq(){
+        ObservableList<Quiz> QuizList=FXCollections.observableArrayList();
+        try {
+                   connection = DBConnect.getConnect();
+        
+            query = "SELECT * FROM `quiz` ORDER BY nbquestion ";
+            
+              preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()){
+                QuizList.add(new  Quiz(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getInt(4)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  
+        
+        return QuizList;
+    }
+     
+    
+     public ObservableList<Quiz> Trieduree(){
+        ObservableList<Quiz> QuizList=FXCollections.observableArrayList();
+        try {
+                   connection = DBConnect.getConnect();
+        
+            query = "SELECT * FROM `quiz` ORDER BY duree";
+            
+              preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()){
+                QuizList.add(new  Quiz(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getInt(4)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  
+        
+        return QuizList;
+    }
+     
+
+    
+ 
+     
+     
+     
+     
     public void Ajouter(String theme,int duree, int nbquestion){
 
         try {
@@ -91,4 +197,11 @@ public class QuizService {
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.execute();
     }
+         
+    
+     
+     
+     
+     
+     
 }

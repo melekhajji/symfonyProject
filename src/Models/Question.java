@@ -11,19 +11,23 @@ package Models;
  */
 public class Question {
     private int id ;
+     private int quiz_id ;
      private String enonce;
-    private String choix1 ;
-     private String choix2 ;
+     private String choix1 ;
+      private String choix2 ;
       private String choix3 ;
-       private int id_quiz ;
+       private String reponse ;
+       
 
-    public Question(int id, String enonce, String choix1, String choix2, String choix3, int id_quiz) {
+    public Question(int id, int quiz_id ,String enonce, String choix1, String choix2, String choix3,  String reponse) {
         this.id = id;
+         this.quiz_id = quiz_id;
         this.enonce = enonce;
+       
         this.choix1 = choix1;
         this.choix2 = choix2;
         this.choix3 = choix3;
-        this.id_quiz = id_quiz;
+        this.reponse = reponse;
     }
 
     public int getId() {
@@ -64,13 +68,23 @@ public class Question {
         this.choix3 = choix3;
     }
 
-    public int getId_quiz() {
-        return id_quiz;
+    public int getQuiz_id() {
+        return quiz_id;
     }
 
-    public void setId_quiz(int id_quiz) {
-        this.id_quiz = id_quiz;
+    public void setQuiz_id(int quiz_id) {
+        this.quiz_id = quiz_id;
     }
+
+    public String getReponse() {
+        return reponse;
+    }
+
+    public void setReponse(String reponse) {
+        this.reponse = reponse;
+    }
+
+  
        
        
     

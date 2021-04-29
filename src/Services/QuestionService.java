@@ -40,50 +40,56 @@ public class QuestionService {
             while (resultSet.next()){
                 QuestionList.add(new  Question(
                         resultSet.getInt(1),
-                        resultSet.getString(2),
-                         resultSet.getString(3),
+                        resultSet.getInt(2),
+                        resultSet.getString(3),
                          resultSet.getString(4),
                          resultSet.getString(5),
-                        resultSet.getInt(6)));
+                         resultSet.getString(6),
+                        resultSet.getString(7)
+                ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return QuestionList;
     }
-       public void Ajouter(String enonce,String choix1, String choix2,String choix3, int id_quiz){
+       public void Ajouter(int quiz_id, String enonce,String choix1, String choix2,String choix3,  String reponse){
 
         try {
         connection = DBConnect.getConnect();
-            query = "INSERT INTO `question`( `enonce`, `choix1`, `choix2`,`choix3`,`id_quiz`) VALUES (?,?,?,?,?)";
+            query = "INSERT INTO `question`( `quiz_id`,`enonce`, `choix1`, `choix2`,`choix3`,`reponse`) VALUES (?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, enonce);
-            preparedStatement.setString(2, choix1);
-            preparedStatement.setString(3, choix2);
-            preparedStatement.setString(4, choix3);
-            preparedStatement.setInt(5,id_quiz);
+            preparedStatement.setInt(1,quiz_id);
+            preparedStatement.setString(2, enonce);
+            preparedStatement.setString(3, choix1);
+            preparedStatement.setString(4, choix2);
+            preparedStatement.setString(5, choix3);
+            preparedStatement.setString(6,reponse);
             preparedStatement.execute();
 
         } catch (SQLException ex) {
         }
 
     }
-        public void modifier(int id,String enonce,String choix1, String choix2,String choix3, int id_quiz) {
+        public void modifier(int id  ,int quiz_id, String enonce, String choix1, String choix2  ,String choix3, String reponse) {
 
         try {
         connection = DBConnect.getConnect();
             query = "UPDATE `question` SET "
+                     + "`quiz_id`=?,"
                     + "`enonce`=?,"
                     + "`choix1`=?,"
                      + "`choix2`=?,"
                      + "`choix3`=?,"
-                    + "`id_quiz`= ? WHERE id = '"+id+"'";
+                    + "`reponse`= ?, WHERE id = '"+id+"'";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, enonce);
-            preparedStatement.setString(2, choix1);
-            preparedStatement.setString(3, choix2);
-             preparedStatement.setString(4, choix3);
-              preparedStatement.setInt(5,id_quiz);
+            preparedStatement.setInt(1,quiz_id);
+            preparedStatement.setString(2, enonce);
+            preparedStatement.setString(3, choix1);
+            preparedStatement.setString(4, choix2);
+             preparedStatement.setString(5, choix3);
+             preparedStatement.setString(6,reponse);
+              
             preparedStatement.execute();
 
         } catch (SQLException ex) {
@@ -96,4 +102,6 @@ public class QuestionService {
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.execute();
     }
+
+   
 }
