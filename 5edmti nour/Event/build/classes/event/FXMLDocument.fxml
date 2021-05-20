@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="769.0" prefWidth="1248.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="event.FXMLDocumentController">
+    <children>
+      <ImageView fitHeight="820.0" fitWidth="1248.0" layoutX="-1.0">
+         <image>
+            <Image url="@../Image/Devenir-le-candidat-Idéal.jpg" />
+         </image>
+         <effect>
+            <Glow />
+         </effect>
+      </ImageView>
+      <Label fx:id="labell" layoutX="480.0" layoutY="217.0" prefHeight="387.0" prefWidth="762.0" />
+      
+      <TableView fx:id="affiche" layoutX="479.0" layoutY="186.0" onMouseClicked="#getSelectedFilm" prefHeight="418.0" prefWidth="762.0">
+         <columns>
+            <TableColumn fx:id="colstart" prefWidth="152.0" text="Date Début" />
+            <TableColumn fx:id="colidF" prefWidth="72.0" text="Id" visible="false" />
+            <TableColumn fx:id="collieu" prefWidth="118.0" text="Lieu" />
+            <TableColumn fx:id="colimage" prefWidth="87.0" text="Image" />
+            <TableColumn fx:id="coltitle" prefWidth="122.0" text="Titre" />
+            <TableColumn fx:id="colend" minWidth="6.0" prefWidth="68.0" text="Date fin" />
+            <TableColumn fx:id="coldescription" prefWidth="110.0" text="Description" />
+            <TableColumn fx:id="colcapacite" prefWidth="73.0" text="Capacité" />
+         </columns>
+         <effect>
+            <ColorAdjust brightness="-0.07" />
+         </effect>
+      </TableView>
+      <GridPane hgap="1.0" layoutX="37.0" layoutY="80.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Date debut" textFill="#393737">
+               <effect>
+                  <Glow />
+               </effect></Label>
+            <Label text="Lieu" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <effect>
+                  <Glow />
+               </effect></Label>
+            <Label text="Image :" GridPane.rowIndex="4">
+               <effect>
+                  <Glow />
+               </effect></Label>
+            <Label text="Titre" GridPane.rowIndex="6">
+               <effect>
+                  <Glow />
+               </effect></Label>
+            <TextField fx:id="lieu" prefHeight="21.0" prefWidth="211.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+            <TextField fx:id="image" GridPane.rowIndex="5" />
+            <TextField fx:id="start" prefHeight="30.0" prefWidth="184.0" GridPane.rowIndex="1" />
+            <TextField fx:id="title" GridPane.rowIndex="7" />
+            <Label text="Description" GridPane.rowIndex="10">
+               <effect>
+                  <Glow />
+               </effect></Label>
+            <Label text="Capacité" GridPane.rowIndex="14">
+               <effect>
+                  <Glow />
+               </effect></Label>
+            <Label text="Date fin" GridPane.rowIndex="8">
+               <effect>
+                  <Glow />
+               </effect></Label>
+            <TextField fx:id="capacite" GridPane.rowIndex="15" />
+            <TextField fx:id="end" GridPane.rowIndex="9" />
+            <TextArea fx:id="desc" prefHeight="83.0" prefWidth="100.0" GridPane.rowIndex="12" />
+         </children>
+      </GridPane>
+      <Label fx:id="lblHeader" alignment="CENTER" layoutX="-35.0" layoutY="21.0" prefHeight="36.0" prefWidth="321.0" text="Ajouter Event" textAlignment="CENTER" textFill="#35a4db" textOverrun="WORD_ELLIPSIS" underline="true" wrapText="true">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+         <effect>
+            <SepiaTone />
+         </effect>
+      </Label>
+      <Label layoutX="611.0" layoutY="27.0" prefHeight="25.0" prefWidth="87.0" text="Recherche :" />
+      <TextField fx:id="tfSearch" layoutX="719.0" layoutY="24.0" onKeyReleased="#tfSearchOnKeyRelese" prefHeight="31.0" prefWidth="403.0" />
+      <Button fx:id="tri" layoutX="1111.0" layoutY="88.0" mnemonicParsing="false" onAction="#triOnAction" text="Tri par capacité" />
+      <Button fx:id="pdf" layoutX="928.0" layoutY="712.0" mnemonicParsing="false" onAction="#btnPdfOnAction" style="-fx-background-color: #300d33;" text="retour" textFill="WHITE" />
+      <Button fx:id="fermerbutton1" layoutX="1042.0" layoutY="714.0" mnemonicParsing="false" onAction="#fermer" prefHeight="28.0" prefWidth="69.0" style="-fx-background-color: #FBE5CD;" text="Fermer">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAjouter" layoutX="37.0" layoutY="605.0" mnemonicParsing="false" onAction="#ajouterEventOnAction" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #FBE5CD;" text="Ajouter">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDelete" layoutX="169.0" layoutY="605.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #FBE5CD;" text="Supprimer">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnimprimerevent" layoutX="308.0" layoutY="605.0" mnemonicParsing="false" onAction="#Imprimer" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #FBE5CD;" text="Imprimer">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </Button>
+      <Button layoutX="152.0" layoutY="678.0" mnemonicParsing="false" onAction="#Modifierevent" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #FBE5CD;" text="Modifier">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
